@@ -3,1162 +3,996 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pierre François Passager – Guide Ardèche</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@formspree/core@2/dist/style.css">
+<title>NeuralPath — Maîtrise l'IA, Façonne ton Futur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --stone: #ffffff;
-  --earth: #f2f8f4;
-  --clay: #daeee3;
-  --terracotta: #1e6e44;
-  --rust: #27905a;
-  --ochre: #b8943a;
-  --cream: #ffffff;
-  --sand: #f0f7f2;
-  --mist: #2e5e42;
-  --sage: #1a4a30;
-  --moss: #123d26;
-  --river: #1a5c3a;
-  --text: #0f2a1a;
-  --text-muted: #3a6b4e;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Josefin Sans', sans-serif;
-  background: #ffffff;
-  color: #0f2a1a;
-  overflow-x: hidden;
-}
-
-/* ─── TEXTURE OVERLAY ─── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.3;
-}
-
-/* ─── NAV ─── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 5%;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(30,110,68,0.15);
-  transition: background 0.3s;
-}
-
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--ochre);
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  line-height: 1.2;
-}
-.nav-logo span { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist); font-family: 'Josefin Sans', sans-serif; }
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-}
-.nav-links a {
-  color: var(--mist);
-  text-decoration: none;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--ochre); }
-
-.nav-cta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--terracotta);
-  color: var(--cream);
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: 1px solid var(--rust);
-  transition: all 0.25s;
-}
-.nav-cta:hover { background: var(--rust); transform: translateY(-1px); }
-
-/* ─── HERO ─── */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 650px;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85');
-  background-size: cover;
-  background-position: center 30%;
-  transform: scale(1.04);
-  animation: heroZoom 18s ease-in-out infinite alternate;
-}
-@keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.0); } }
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(15,42,26,0.92) 0%,
-    rgba(15,42,26,0.45) 40%,
-    rgba(15,42,26,0.1) 75%,
-    rgba(15,42,26,0.0) 100%
-  );
-}
-
-.hero-side-line {
-  position: absolute;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--ochre), transparent);
-  opacity: 0.5;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 0 5% 6rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  gap: 2rem;
-}
-
-.hero-eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.hero-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 30px;
-  height: 1px;
-  background: var(--ochre);
-}
-
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 5.5vw, 5rem);
-  font-weight: 300;
-  line-height: 1.05;
-  color: var(--cream);
-  letter-spacing: -0.01em;
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--ochre);
-}
-
-.hero-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  color: var(--mist);
-  line-height: 1.7;
-  font-style: italic;
-  max-width: 380px;
-  margin-bottom: 2rem;
-}
-
-.hero-cta-group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--terracotta);
-  color: var(--cream);
-  text-decoration: none;
-  padding: 0.9rem 2rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: 1px solid var(--rust);
-  transition: all 0.25s;
-  cursor: pointer;
-  font-family: 'Josefin Sans', sans-serif;
-}
-.btn-primary:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: transparent;
-  color: var(--cream);
-  text-decoration: none;
-  padding: 0.9rem 2rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border: 1px solid rgba(242,234,216,0.25);
-  transition: all 0.25s;
-}
-.btn-outline:hover { border-color: var(--ochre); color: var(--ochre); }
-
-.hero-tags {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.hero-tag {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--mist);
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(200,191,176,0.2);
-  border-radius: 0;
-}
-
-/* ─── SECTION BASE ─── */
-.section { padding: 7rem 5%; position: relative; z-index: 1; }
-.section-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-.section-label::after {
-  content: '';
-  flex: 0 0 40px;
-  height: 1px;
-  background: var(--ochre);
-  opacity: 0.5;
-}
-
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--cream);
-  margin-bottom: 1.5rem;
-}
-.section-title em { font-style: italic; color: var(--ochre); }
-
-/* ─── ABOUT ─── */
-#about {
-  background: var(--earth);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: center;
-}
-
-.about-image-wrapper {
-  position: relative;
-}
-.about-image-frame {
-  position: relative;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-}
-.about-image-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: sepia(20%) contrast(1.05);
-}
-.about-image-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(22,32,25,0.6));
-}
-.about-corner {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-color: var(--ochre);
-  border-style: solid;
-  opacity: 0.5;
-}
-.about-corner.tl { top: -12px; left: -12px; border-width: 2px 0 0 2px; }
-.about-corner.br { bottom: -12px; right: -12px; border-width: 0 2px 2px 0; }
-
-.about-badge {
-  position: absolute;
-  bottom: 2rem;
-  right: -2rem;
-  background: var(--terracotta);
-  padding: 1.2rem 1.5rem;
-  text-align: center;
-  z-index: 2;
-}
-.about-badge-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--cream);
-  line-height: 1;
-}
-.about-badge-txt {
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(242,234,216,0.8);
-  margin-top: 0.3rem;
-}
-
-.about-text p {
-  color: var(--mist);
-  line-height: 1.85;
-  font-size: 0.95rem;
-  margin-bottom: 1.2rem;
-}
-.about-text em { color: var(--ochre); font-style: italic; }
-
-.about-signature {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-style: italic;
-  color: var(--ochre);
-  margin-top: 2rem;
-  opacity: 0.8;
-}
-
-/* ─── LIEUX INSOLITES ─── */
-#places { background: var(--stone); }
-
-.places-intro {
-  max-width: 600px;
-  margin-bottom: 4rem;
-}
-.places-intro p {
-  color: var(--mist);
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
-
-.places-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  gap: 1.5rem;
-}
-
-.place-card {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.place-card:nth-child(1) { grid-column: span 7; grid-row: span 2; aspect-ratio: unset; height: 520px; }
-.place-card:nth-child(2) { grid-column: span 5; height: 250px; }
-.place-card:nth-child(3) { grid-column: span 5; height: 250px; }
-.place-card:nth-child(4) { grid-column: span 4; height: 280px; }
-.place-card:nth-child(5) { grid-column: span 4; height: 280px; }
-.place-card:nth-child(6) { grid-column: span 4; height: 280px; }
-
-.place-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: sepia(15%) contrast(1.05) brightness(0.9);
-  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s;
-}
-.place-card:hover img {
-  transform: scale(1.06);
-  filter: sepia(5%) contrast(1.1) brightness(1.0);
-}
-
-.place-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(15,42,26,0.88) 0%, rgba(15,42,26,0.25) 50%, transparent 100%);
-  transition: background 0.4s;
-}
-.place-card:hover .place-card-overlay {
-  background: linear-gradient(to top, rgba(15,42,26,0.92) 0%, rgba(15,42,26,0.35) 60%, transparent 100%);
-}
-
-.place-card-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem;
-}
-.place-card-tag {
-  font-size: 0.6rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 0.4rem;
-}
-.place-card-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--cream);
-  line-height: 1.2;
-}
-.place-card:nth-child(1) .place-card-name { font-size: 1.8rem; }
-.place-card-desc {
-  font-size: 0.78rem;
-  color: var(--mist);
-  margin-top: 0.4rem;
-  line-height: 1.6;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.place-card:hover .place-card-desc { max-height: 80px; }
-
-/* ─── SERVICES ─── */
-#services {
-  background: var(--earth);
-}
-
-.services-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1px;
-  background: rgba(201,168,76,0.1);
-  border: 1px solid rgba(201,168,76,0.1);
-}
-
-.service-item {
-  background: var(--earth);
-  padding: 2.5rem 2rem;
-  transition: background 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.service-item::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 0;
-  background: var(--terracotta);
-  transition: height 0.4s ease;
-}
-.service-item:hover { background: rgba(30,48,40,0.6); }
-.service-item:hover::before { height: 100%; }
-
-.service-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
-  font-weight: 300;
-  color: rgba(201,168,76,0.15);
-  line-height: 1;
-  margin-bottom: 1rem;
-}
-.service-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-.service-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--cream);
-  margin-bottom: 0.75rem;
-}
-.service-desc {
-  font-size: 0.82rem;
-  color: var(--mist);
-  line-height: 1.75;
-}
-
-/* ─── CIRCUITS ─── */
-#circuits {
-  background: var(--stone);
-}
-
-.circuits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2px;
-  margin-top: 3rem;
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.08);
-}
-
-.circuit-card {
-  background: var(--stone);
-  display: flex;
-  flex-direction: column;
-  transition: background 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.circuit-card:hover { background: var(--earth); }
-
-.circuit-img {
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-}
-.circuit-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: sepia(20%) contrast(1.05) brightness(0.85);
-  transition: transform 0.6s ease, filter 0.4s;
-}
-.circuit-card:hover .circuit-img img {
-  transform: scale(1.05);
-  filter: sepia(10%) contrast(1.05) brightness(0.95);
-}
-.circuit-img-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-}
-
-.circuit-badge {
-  position: absolute;
-  bottom: 0.8rem;
-  left: 0.8rem;
-  background: rgba(15,42,26,0.82);
-  color: var(--cream);
-  padding: 0.25rem 0.7rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border: 1px solid rgba(201,168,76,0.2);
-}
-
-.circuit-body {
-  padding: 1.75rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-.circuit-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: var(--cream);
-  margin-bottom: 0.75rem;
-  line-height: 1.25;
-}
-.circuit-desc {
-  font-size: 0.82rem;
-  color: var(--mist);
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
-  flex-grow: 1;
-}
-.circuit-tip {
-  border-left: 2px solid var(--terracotta);
-  padding-left: 0.9rem;
-  font-size: 0.78rem;
-  color: var(--mist);
-  line-height: 1.6;
-}
-.circuit-tip strong { color: var(--ochre); display: block; margin-bottom: 0.3rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* ─── PRICING ─── */
-#pricing {
-  background: linear-gradient(135deg, var(--earth) 0%, var(--clay) 100%);
-  position: relative;
-  overflow: hidden;
-}
-#pricing::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(42,102,68,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.pricing-card {
-  background: rgba(15,42,26,0.55);
-  border: 1px solid rgba(201,168,76,0.12);
-  padding: 2.5rem 2rem;
-  position: relative;
-  transition: border-color 0.3s, transform 0.3s;
-}
-.pricing-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
-.pricing-card.featured {
-  background: var(--terracotta);
-  border-color: var(--rust);
-}
-.pricing-card.featured:hover { border-color: var(--ochre); }
-
-/* Launch discount styles */
-.launch-banner {
-  background: linear-gradient(135deg, #b8943a, #d4b84c);
-  color: #fff;
-  text-align: center;
-  padding: .55rem 1rem;
-  font-size: .68rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 3rem;
-  position: relative;
-}
-.launch-banner::before, .launch-banner::after {
-  content: '✦';
-  margin: 0 .75rem;
-  opacity: .7;
-}
-.price-block { margin-bottom: .25rem; }
-.price-original {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
-  color: var(--mist);
-  text-decoration: line-through;
-  opacity: .6;
-  line-height: 1;
-  display: block;
-}
-.pricing-card.featured .price-original { color: rgba(255,255,255,.55); }
-.price-promo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--text);
-  line-height: 1;
-}
-.pricing-card.featured .price-promo { color: #fff; }
-.price-unit {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: .78rem;
-  color: var(--text-muted);
-  letter-spacing: .05em;
-}
-.pricing-card.featured .price-unit { color: rgba(255,255,255,.65); }
-.price-save {
-  display: inline-block;
-  background: #b8943a;
-  color: #fff;
-  font-size: .6rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  padding: .2rem .6rem;
-  margin-top: .5rem;
-  font-weight: 600;
-}
-.pricing-card.featured .price-save { background: rgba(255,255,255,.25); }
-
-.pricing-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 1rem;
-}
-.pricing-card.featured .pricing-label { color: rgba(242,234,216,0.7); }
-
-.pricing-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  color: var(--cream);
-  margin-bottom: 0.5rem;
-}
-.pricing-price {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--cream);
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-.pricing-price span {
-  font-size: 1rem;
-  color: var(--mist);
-}
-.pricing-card.featured .pricing-price span { color: rgba(242,234,216,0.7); }
-
-.pricing-divider {
-  height: 1px;
-  background: rgba(201,168,76,0.2);
-  margin: 1.5rem 0;
-}
-.pricing-card.featured .pricing-divider { background: rgba(242,234,216,0.25); }
-
-.pricing-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-.pricing-features li {
-  font-size: 0.82rem;
-  color: var(--mist);
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  line-height: 1.5;
-}
-.pricing-features li::before {
-  content: '—';
-  color: var(--ochre);
-  flex-shrink: 0;
-  font-size: 0.9rem;
-  line-height: 1.3;
-}
-.pricing-card.featured .pricing-features li { color: rgba(242,234,216,0.85); }
-.pricing-card.featured .pricing-features li::before { color: var(--cream); }
-
-.pricing-note {
-  margin-top: 1.5rem;
-  font-size: 0.72rem;
-  color: var(--mist);
-  font-style: italic;
-}
-.pricing-card.featured .pricing-note { color: rgba(242,234,216,0.6); }
-
-/* ─── CONTACT ─── */
-#contact {
-  background: var(--stone);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: start;
-}
-
-.contact-left { padding-top: 1rem; }
-.contact-info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(201,168,76,0.1);
-}
-.contact-info-item:last-child { border-bottom: none; }
-.contact-info-icon { font-size: 1.5rem; padding-top: 0.1rem; }
-.contact-info-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 0.4rem;
-}
-.contact-info-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  color: var(--cream);
-}
-.contact-info-value a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-info-value a:hover { color: var(--ochre); }
-
-.contact-cta-call {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: var(--terracotta);
-  padding: 1.2rem 1.8rem;
-  text-decoration: none;
-  margin-top: 2rem;
-  border: 1px solid var(--rust);
-  transition: all 0.25s;
-  width: fit-content;
-}
-.contact-cta-call:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-.contact-cta-call-icon { font-size: 1.4rem; }
-.contact-cta-call-text { color: var(--cream); }
-.contact-cta-call-text strong { display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.2rem; }
-.contact-cta-call-text span { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 0.05em; }
-
-/* ─── FORM ─── */
-.contact-form-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: var(--cream);
-  margin-bottom: 2rem;
-}
-.contact-form-title em { font-style: italic; color: var(--ochre); }
-
-.form-group {
-  margin-bottom: 1.4rem;
-}
-.form-label {
-  display: block;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 0.5rem;
-}
-.form-input,
-.form-textarea {
-  width: 100%;
-  background: rgba(22,32,25,0.6);
-  border: 1px solid rgba(201,168,76,0.15);
-  color: var(--cream);
-  padding: 0.85rem 1rem;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.88rem;
-  transition: border-color 0.25s;
-  outline: none;
-  -webkit-appearance: none;
-}
-.form-input:focus,
-.form-textarea:focus { border-color: rgba(201,168,76,0.5); background: rgba(30,48,40,0.4); }
-.form-input::placeholder,
-.form-textarea::placeholder { color: rgba(160,144,128,0.5); }
-.form-textarea { resize: vertical; min-height: 130px; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-.form-submit {
-  width: 100%;
-  padding: 1rem;
-  background: var(--terracotta);
-  border: 1px solid var(--rust);
-  color: var(--cream);
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s;
-  margin-top: 0.5rem;
-}
-.form-submit:hover { background: var(--rust); transform: translateY(-1px); }
-
-/* ─── INSOLITE STRIP ─── */
-.insolite-strip {
-  background: var(--clay);
-  padding: 5rem 5%;
-  overflow: hidden;
-}
-.insolite-strip-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 300;
-  color: var(--cream);
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-.insolite-strip-title em { color: var(--ochre); font-style: italic; }
-
-.insolite-scroll {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--terracotta) var(--earth);
-  -webkit-overflow-scrolling: touch;
-}
-.insolite-scroll::-webkit-scrollbar { height: 3px; }
-.insolite-scroll::-webkit-scrollbar-track { background: var(--earth); }
-.insolite-scroll::-webkit-scrollbar-thumb { background: var(--terracotta); }
-
-.insolite-item {
-  flex-shrink: 0;
-  width: 280px;
-  position: relative;
-  overflow: hidden;
-}
-.insolite-item img {
-  width: 280px;
-  height: 360px;
-  object-fit: cover;
-  display: block;
-  filter: sepia(20%) contrast(1.05) brightness(0.85);
-  transition: filter 0.4s, transform 0.5s;
-}
-.insolite-item:hover img { filter: sepia(5%) contrast(1.1) brightness(1); transform: scale(1.03); }
-.insolite-item-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(15,26,18,0.92), transparent);
-  padding: 2rem 1rem 1rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: var(--cream);
-  line-height: 1.3;
-}
-.insolite-item-tag {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: 0.3rem;
-}
-
-/* ─── MENTIONS ─── */
-#mentions {
-  background: var(--earth);
-  border-top: 1px solid rgba(201,168,76,0.1);
-  padding: 5rem 5%;
-}
-.mentions-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--cream);
-  margin-bottom: 1.5rem;
-}
-.mentions-text {
-  font-size: 0.82rem;
-  color: var(--mist);
-  line-height: 1.9;
-  max-width: 800px;
-}
-.mentions-text strong { color: var(--cream); }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--stone);
-  border-top: 1px solid rgba(201,168,76,0.12);
-  padding: 3rem 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--ochre);
-}
-.footer-copy {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-}
-.footer-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.footer-links a {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--ochre); }
-
-/* ─── SCROLL ANIMATIONS ─── */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-[data-reveal].visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .hero-content { grid-template-columns: 1fr; }
-  .hero-tags { display: none; }
-  #about { grid-template-columns: 1fr; gap: 3rem; }
-  .about-badge { right: 0; bottom: 1rem; }
-  .places-grid { display: flex; flex-direction: column; }
-  .place-card { height: 280px !important; }
-  #contact { grid-template-columns: 1fr; gap: 3rem; }
-  .form-row { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  footer { flex-direction: column; text-align: center; }
-}
-
-/* ─── LIGHT THEME OVERRIDES ─── */
-
-/* Nav light */
-nav { box-shadow: 0 1px 20px rgba(0,0,0,0.08); }
-.nav-logo { color: #1e6e44; }
-.nav-logo span { color: #3a6b4e; }
-.nav-links a { color: #1a4a30; }
-.nav-links a:hover { color: #1e6e44; }
-.nav-cta { background: #1e6e44; border-color: #27905a; color: #fff; }
-.nav-cta:hover { background: #27905a; }
-
-/* Hero stays dark (has dark overlay) — text remains white */
-.hero h1 { color: #ffffff; }
-.hero h1 em { color: #d4b84c; }
-.hero-eyebrow { color: #d4b84c; }
-.hero-eyebrow::before { background: #d4b84c; }
-.hero-sub { color: #d4eadc; }
-.hero-side-line { background: linear-gradient(to bottom, transparent, #d4b84c, transparent); }
-.hero-tag { color: #d4eadc; border-color: rgba(212,232,220,0.3); }
-.btn-primary { background: #1e6e44; border-color: #27905a; color: #fff; }
-.btn-primary:hover { background: #27905a; }
-.btn-outline { color: #fff; border-color: rgba(255,255,255,0.4); }
-.btn-outline:hover { border-color: #d4b84c; color: #d4b84c; }
-
-/* About section — light bg */
-#about { background: #f2f8f4; }
-.about-text p { color: #2a4a38; }
-.about-text em { color: #1e6e44; }
-.about-signature { color: #1e6e44; }
-.about-badge { background: #1e6e44; }
-.section-label { color: #1e6e44; }
-.section-label::after { background: #1e6e44; }
-.section-title { color: #0f2a1a; }
-.section-title em { color: #1e6e44; }
-.about-corner { border-color: #b8943a; }
-
-/* Places section — white bg */
-#places { background: #ffffff; }
-.places-intro p { color: #2a4a38; }
-
-/* Services — light green bg */
-#services { background: #f2f8f4; }
-.services-header .section-title { color: #0f2a1a; }
-.service-item { background: #f2f8f4; }
-.service-item:hover { background: #daeee3; }
-.service-item::before { background: #1e6e44; }
-.service-num { color: rgba(30,110,68,0.18); }
-.service-name { color: #0f2a1a; }
-.service-desc { color: #2a4a38; }
-
-/* Circuits — white bg */
-#circuits { background: #ffffff; }
-.circuits-grid { background: rgba(30,110,68,0.07); border-color: rgba(30,110,68,0.07); }
-.circuit-card { background: #ffffff; }
-.circuit-card:hover { background: #f2f8f4; }
-.circuit-name { color: #0f2a1a; }
-.circuit-desc { color: #2a4a38; }
-.circuit-tip { border-left-color: #1e6e44; color: #2a4a38; }
-.circuit-tip strong { color: #1e6e44; }
-
-/* Insolite strip — rich green bg stays dark */
-.insolite-strip { background: #0f2a1a; }
-.insolite-strip-title { color: #ffffff; }
-.insolite-strip-title em { color: #d4b84c; }
-.insolite-item-tag { color: #d4b84c; }
-.insolite-item-label { color: #ffffff; }
-
-/* Pricing — light green bg */
-#pricing { background: linear-gradient(135deg, #f2f8f4 0%, #daeee3 100%); }
-.pricing-card { background: rgba(255,255,255,0.8); border-color: rgba(30,110,68,0.15); }
-.pricing-card:hover { border-color: rgba(30,110,68,0.4); }
-.pricing-label { color: #1e6e44; }
-.pricing-name { color: #0f2a1a; }
-.pricing-price { color: #0f2a1a; }
-.pricing-price span { color: #3a6b4e; }
-.pricing-divider { background: rgba(30,110,68,0.15); }
-.pricing-features li { color: #2a4a38; }
-.pricing-features li::before { color: #1e6e44; }
-.pricing-note { color: #3a6b4e; }
-.pricing-card.featured { background: #1e6e44; border-color: #27905a; }
-.pricing-card.featured .pricing-label { color: rgba(255,255,255,0.75); }
-.pricing-card.featured .pricing-name,
-.pricing-card.featured .pricing-price { color: #ffffff; }
-.pricing-card.featured .pricing-price span { color: rgba(255,255,255,0.7); }
-.pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.25); }
-.pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.88); }
-.pricing-card.featured .pricing-features li::before { color: #d4b84c; }
-.pricing-card.featured .pricing-note { color: rgba(255,255,255,0.6); }
-
-/* Contact — white bg */
-#contact { background: #ffffff; }
-.contact-info-label { color: #1e6e44; }
-.contact-info-value { color: #0f2a1a; }
-.contact-cta-call { background: #1e6e44; border-color: #27905a; }
-.contact-cta-call:hover { background: #27905a; }
-.contact-cta-call-text strong { display: block; color: rgba(255,255,255,0.8); }
-.contact-cta-call-text span { color: #fff; }
-.contact-form-title { color: #0f2a1a; }
-.contact-form-title em { color: #1e6e44; }
-.form-label { color: #1e6e44; }
-.form-input, .form-textarea { background: #f2f8f4; border-color: rgba(30,110,68,0.2); color: #0f2a1a; }
-.form-input:focus, .form-textarea:focus { border-color: rgba(30,110,68,0.5); background: #daeee3; }
-.form-input::placeholder, .form-textarea::placeholder { color: rgba(42,74,56,0.4); }
-.form-submit { background: #1e6e44; border-color: #27905a; }
-.form-submit:hover { background: #27905a; }
-
-/* Contact info border */
-.contact-info-item { border-bottom-color: rgba(30,110,68,0.1); }
-
-/* Mentions */
-#mentions { background: #f2f8f4; border-top-color: rgba(30,110,68,0.1); }
-.mentions-title { color: #0f2a1a; }
-.mentions-text { color: #2a4a38; }
-.mentions-text strong { color: #0f2a1a; }
-
-/* Footer */
-footer { background: #0f2a1a; border-top-color: rgba(212,184,76,0.2); }
-.footer-logo { color: #d4b84c; }
-.footer-copy { color: rgba(255,255,255,0.4); }
-.footer-links a { color: rgba(255,255,255,0.45); }
-.footer-links a:hover { color: #d4b84c; }
-
-/* Nav scroll bg */
-nav.scrolled { background: rgba(255,255,255,0.99) !important; }
-
-/* Pricing #pricing::before */
-#pricing::before { background: radial-gradient(circle, rgba(30,110,68,0.08) 0%, transparent 70%); }
+  :root {
+    --black: #080a0f;
+    --deep: #0d1117;
+    --surface: #111827;
+    --card: #151d2b;
+    --border: #1e2d42;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --white: #f8fafc;
+    --green: #10b981;
+    --red: #f43f5e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(8, 10, 15, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--black) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 700 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.25);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeSlideDown 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeSlideDown 0.7s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    animation: fadeSlideDown 0.7s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeSlideDown 0.7s ease 0.3s both;
+  }
+
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #0099cc);
+    color: var(--black);
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(0,229,255,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(0,229,255,0.5);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    animation: fadeSlideDown 0.7s ease 0.4s both;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  /* ── WHY SECTION ── */
+  .why { background: var(--deep); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+  .why-features { display: flex; flex-direction: column; gap: 2rem; }
+
+  .feature-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.15);
+  }
+
+  .feature-item h3 {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .feature-item p { color: var(--muted); font-size: 0.9rem; }
+
+  .why-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-visual::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+  }
+
+  .brain-diagram {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .node {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--deep);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-align: center;
+    padding: 0.25rem;
+    animation: nodeFloat 3s ease-in-out infinite;
+  }
+
+  .node-center { width: 90px; height: 90px; font-size: 0.7rem; border-color: var(--accent); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0s; }
+  .node-1 { width: 65px; height: 65px; top: 10%; left: 10%; animation-delay: 0.5s; border-color: var(--accent2); color: var(--accent2); }
+  .node-2 { width: 70px; height: 70px; top: 10%; right: 10%; animation-delay: 1s; border-color: #f59e0b; color: #f59e0b; }
+  .node-3 { width: 60px; height: 60px; bottom: 10%; left: 15%; animation-delay: 1.5s; border-color: var(--green); color: var(--green); }
+  .node-4 { width: 68px; height: 68px; bottom: 10%; right: 10%; animation-delay: 2s; border-color: var(--red); color: var(--red); }
+
+  @keyframes nodeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .node-center { animation-name: none; }
+
+  .connection {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+    height: 1px;
+    transform-origin: left center;
+  }
+
+  /* ── EBOOKS SECTION ── */
+  .ebooks { background: var(--black); }
+
+  .ebooks-header { margin-bottom: 4rem; }
+
+  .ebooks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* FREE EBOOK — full width */
+  .ebook-free {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(124,58,237,0.05));
+    border: 1px solid rgba(0,229,255,0.25);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .ebook-free:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,229,255,0.1);
+  }
+
+  .ebook-free::before {
+    content: 'GRATUIT';
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: var(--accent);
+    color: var(--black);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  .ebook-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+
+  .ebook-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  }
+
+  .ebook-card.tier-starter:hover { border-color: var(--green); box-shadow: 0 24px 60px rgba(16,185,129,0.15); }
+  .ebook-card.tier-pro:hover { border-color: var(--accent2); box-shadow: 0 24px 60px rgba(124,58,237,0.15); }
+  .ebook-card.tier-expert:hover { border-color: var(--accent3); box-shadow: 0 24px 60px rgba(245,158,11,0.15); }
+
+  .ebook-cover {
+    border-radius: 10px;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-free { background: linear-gradient(135deg, #0d1117, #00e5ff15); border: 1px solid rgba(0,229,255,0.3); }
+  .cover-starter { background: linear-gradient(135deg, #0d1117, #10b98115); border: 1px solid rgba(16,185,129,0.3); }
+  .cover-pro { background: linear-gradient(135deg, #0d1117, #7c3aed20); border: 1px solid rgba(124,58,237,0.3); }
+  .cover-expert { background: linear-gradient(135deg, #0d1117, #f59e0b15); border: 1px solid rgba(245,158,11,0.3); }
+
+  .cover-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .cover-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0 1rem;
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .cover-author {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .ebook-tier {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .tier-free-label { color: var(--accent); }
+  .tier-starter-label { color: var(--green); }
+  .tier-pro-label { color: var(--accent2); }
+  .tier-expert-label { color: var(--accent3); }
+
+  .ebook-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .ebook-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .ebook-chapters {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .ebook-chapters li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .ebook-chapters li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .ebook-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .price-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--white);
+  }
+  .price-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .btn-ebook {
+    display: block;
+    text-align: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+
+  .btn-free { background: rgba(0,229,255,0.12); color: var(--accent); border: 1px solid rgba(0,229,255,0.3); }
+  .btn-free:hover { background: var(--accent); color: var(--black); }
+  .btn-starter { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+  .btn-starter:hover { background: var(--green); color: var(--black); }
+  .btn-pro { background: rgba(124,58,237,0.12); color: var(--accent2); border: 1px solid rgba(124,58,237,0.3); }
+  .btn-pro:hover { background: var(--accent2); color: var(--white); }
+  .btn-expert { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.3); }
+  .btn-expert:hover { background: var(--accent3); color: var(--black); }
+
+  /* FREE BOOK — big layout */
+  .free-content { display: flex; flex-direction: column; }
+  .free-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .free-visual-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.05) 0%, rgba(124,58,237,0.08) 100%);
+  }
+
+  /* ── WHAT YOU LEARN ── */
+  .learn { background: var(--deep); }
+
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .learn-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.3s;
+  }
+  .learn-card:hover { border-color: rgba(0,229,255,0.3); }
+
+  .learn-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(0,229,255,0.12);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .learn-card h3 {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  .learn-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--black); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .testi-stars {
+    color: var(--accent3);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .testi-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    font-style: italic;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .testi-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .testi-name { font-weight: 600; font-size: 0.875rem; color: var(--white); }
+  .testi-role { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── FAQ ── */
+  .faq { background: var(--deep); }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--accent); }
+
+  .faq-q .arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    color: var(--muted);
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+  .faq-a-inner {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .faq-item.open .faq-a { max-height: 400px; }
+  .faq-item.open .arrow { transform: rotate(45deg); color: var(--accent); }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    background: var(--black);
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    width: 800px; height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-final h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .cta-final h2 span { color: var(--accent); }
+  .cta-final p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  .footer-copy {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    background: var(--border);
+    border: none;
+    color: var(--muted);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--surface); color: var(--white); }
+
+  .modal h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .modal p { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.75rem; }
+
+  .modal-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .modal-form input, .modal-form select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  .modal-form input:focus, .modal-form select:focus { border-color: var(--accent); }
+  .modal-form input::placeholder { color: var(--muted); }
+
+  .modal-btn {
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .modal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .modal-guarantee {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
+
+  /* ── PROGRESS BAR (reading level) ── */
+  .level-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .level-label { font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
+  .level-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .level-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+  .fill-1 { width: 20%; background: var(--accent); }
+  .fill-2 { width: 50%; background: var(--green); }
+  .fill-3 { width: 78%; background: var(--accent2); }
+  .fill-4 { width: 98%; background: var(--accent3); }
+
+  /* ── POPULAR BADGE ── */
+  .popular-badge {
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--accent2);
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.75rem;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .why-grid, .ebooks-grid { grid-template-columns: 1fr; }
+    .ebook-free { grid-template-columns: 1fr; }
+    .learn-grid, .testi-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: rgba(0,229,255,0.04);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 0.6rem 0;
+    white-space: nowrap;
+  }
+  .ticker {
+    display: inline-flex;
+    gap: 3rem;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── GUARANTEE BAND ── */
+  .guarantee {
+    background: rgba(16,185,129,0.05);
+    border-top: 1px solid rgba(16,185,129,0.15);
+    border-bottom: 1px solid rgba(16,185,129,0.15);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .guarantee strong { color: var(--green); }
 
 </style>
 </head>
@@ -1166,564 +1000,608 @@ nav.scrolled { background: rgba(255,255,255,0.99) !important; }
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">
-    Pierre François Passager
-    <span>Accompagnateur Touristique · Ardèche</span>
-  </a>
+  <div class="logo">Neural<span>Path</span></div>
   <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#services">Prestations</a></li>
-    <li><a href="#places">Découvertes</a></li>
-    <li><a href="#circuits">Circuits</a></li>
-    <li><a href="#pricing">Tarifs</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="mailto:guide.ardeche.touriste@gmail.com">✉️ Email</a></li>
+    <li><a href="#why">Pourquoi l'IA</a></li>
+    <li><a href="#ebooks">Formations</a></li>
+    <li><a href="#apprendre">Programme</a></li>
+    <li><a href="#temoignages">Avis</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#ebooks" class="nav-cta">Commencer →</a></li>
   </ul>
-  <a class="nav-cta" href="tel:0748169803">📞 Réserver</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-side-line"></div>
-  <div class="hero-content">
-    <div>
-      <div class="hero-eyebrow" data-reveal>Ardéchois de naissance · 07</div>
-      <h1 data-reveal>Pierre François<br><em>Passager</em></h1>
-      <p class="hero-sub" data-reveal>Né et élevé en Ardèche, je connais ce territoire dans ses moindres recoins. Gorges, villages de pierre, cascades secrètes, garrigue et vignobles…</p>
-      <div class="hero-cta-group" data-reveal>
-        <a class="btn-primary" href="#contact">Réserver une visite</a>
-        <a class="btn-outline" href="#places">Découvrir l'Ardèche</a>
-      </div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">🧠 Comprendre l'IA — Dès Aujourd'hui</div>
+
+  <h1>Maîtrise<br><em>l'Intelligence</em><br>Artificielle</h1>
+
+  <p class="hero-sub">
+    De zéro à expert. Des guides clairs, progressifs et captivants pour comprendre vraiment comment fonctionne l'IA — et comment en tirer parti dans ta vie et ta carrière.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#ebooks" class="btn-primary">📚 Voir les formations</a>
+    <a href="#ebooks" class="btn-ghost">Télécharger gratuitement</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">Guides complets</div>
     </div>
-    <div class="hero-tags" data-reveal>
-      <span class="hero-tag">Guide local</span>
-      <span class="hero-tag">Anti-guide</span>
-      <span class="hero-tag">Spots secrets</span>
-      <span class="hero-tag">Sur mesure</span>
+    <div class="stat">
+      <div class="stat-num">2<span>k</span></div>
+      <div class="stat-label">Lecteurs actifs</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">98<span>%</span></div>
+      <div class="stat-label">Satisfaction</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0<span>€</span></div>
+      <div class="stat-label">Pour commencer</div>
     </div>
   </div>
 </section>
 
-<!-- À PROPOS -->
-<section class="section" id="about">
-  <div class="about-image-wrapper" data-reveal>
-    <div class="about-image-frame">
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80" alt="Paysage Ardèche">
-      <div class="about-corner tl"></div>
-      <div class="about-corner br"></div>
-    </div>
-    <div class="about-badge">
-      <div class="about-badge-num">15+</div>
-      <div class="about-badge-txt">Ans d'expérience</div>
-    </div>
-  </div>
-
-  <div class="about-text" data-reveal>
-    <div class="section-label">À propos</div>
-    <h2 class="section-title">Je vous fais découvrir<br><em>la vraie Ardèche</em></h2>
-    <p>Celle qui ne se trouve dans <em>aucun guide touristique</em>. Passionné d'histoire, de géologie et de nature, je partage ma connaissance intime du territoire avec ceux qui souhaitent sortir des sentiers battus.</p>
-    <p>Accompagnateur touristique certifié, je construis chaque excursion sur mesure, selon vos envies, votre rythme et votre niveau. Familles, couples, groupes — chacun trouve son Ardèche.</p>
-    <p>De la grotte ornée à la cascade invisible, du village de schiste aux gorges sauvages, <em>chaque sortie est une révélation</em>.</p>
-    <div class="about-signature">Pierre François</div>
-  </div>
-</section>
-
-<!-- LIEUX INSOLITES -->
-<section class="section" id="places">
-  <div class="places-intro" data-reveal>
-    <div class="section-label">Découvertes</div>
-    <h2 class="section-title">Lieux <em>insolites</em><br>& secrets d'Ardèche</h2>
-    <p>Au-delà des gorges connues, l'Ardèche recèle des trésors que seuls les locaux partagent. Des formations rocheuses mystérieuses, des sources cachées, des villages hors du temps.</p>
-  </div>
-
-  <div class="places-grid">
-    <!-- Carte 1 - grande -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Gorges de l'Ardèche" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Géologie · Vertige</div>
-        <div class="place-card-name">Les Gorges Sauvages du Chassezac</div>
-        <div class="place-card-desc">Un canyon d'une sauvagerie rare, presque inconnu des touristes. Parois de grès rouge à pic, eau émeraude, silence total — à 40 minutes de Vallon.</div>
-      </div>
-    </div>
-
-    <!-- Carte 2 -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=800&q=80" alt="Pont du Diable Thueyts" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Légende · Basalte</div>
-        <div class="place-card-name">Pont du Diable, Thueyts</div>
-        <div class="place-card-desc">Un arc naturel de basalte sculpté par la lave et l'Ardèche, chargé de légendes médiévales.</div>
-      </div>
-    </div>
-
-    <!-- Carte 3 -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80" alt="Bois de Paiolive" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Forêt · Minéral</div>
-        <div class="place-card-name">Bois de Païolive</div>
-        <div class="place-card-desc">Un labyrinthe de roches calcaires millénaires sous une forêt de chênes verts — un monde à part.</div>
-      </div>
-    </div>
-
-    <!-- Carte 4 -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80" alt="Village de schiste Ardèche" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Patrimoine</div>
-        <div class="place-card-name">Thines, village de schiste</div>
-        <div class="place-card-desc">Un village médiéval accroché à une falaise, accessible uniquement à pied. Hors du temps.</div>
-      </div>
-    </div>
-
-    <!-- Carte 5 -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80" alt="Panorama Ardèche volcanique" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Volcanisme</div>
-        <div class="place-card-name">Coulées basaltiques de Jaujac</div>
-        <div class="place-card-desc">Des orgues de basalte géantes figées il y a 10 000 ans. Un paysage martien au cœur de l'Ardèche.</div>
-      </div>
-    </div>
-
-    <!-- Carte 6 -->
-    <div class="place-card" data-reveal>
-      <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80" alt="Cascade secrète Ardèche" loading="lazy">
-      <div class="place-card-overlay"></div>
-      <div class="place-card-info">
-        <div class="place-card-tag">Cascade · Secret</div>
-        <div class="place-card-name">La Cascade de Ray-Pic</div>
-        <div class="place-card-desc">La plus belle cascade d'Ardèche, que les touristes ne trouvent jamais sans guide local.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <div class="services-header" data-reveal>
-    <div>
-      <div class="section-label">Prestations</div>
-      <h2 class="section-title">Des expériences<br><em>sur mesure</em></h2>
-    </div>
-    <a class="btn-outline" href="#contact">Me contacter</a>
-  </div>
-
-  <div class="services-grid" data-reveal>
-    <div class="service-item">
-      <div class="service-num">01</div>
-      <div class="service-icon">🥾</div>
-      <div class="service-name">Randonnées guidées</div>
-      <div class="service-desc">Demi-journée ou journée complète sur des sentiers confidentiels. Faune, flore, géologie : je raconte l'Ardèche vivante.</div>
-    </div>
-    <div class="service-item">
-      <div class="service-num">02</div>
-      <div class="service-icon">🏛️</div>
-      <div class="service-name">Visites de villages</div>
-      <div class="service-desc">Les ruelles pavées de Vogüé, Balazuc, Labeaume, Alba-la-Romaine… Avec les anecdotes que les guides ne racontent pas.</div>
-    </div>
-    <div class="service-item">
-      <div class="service-num">03</div>
-      <div class="service-icon">🌋</div>
-      <div class="service-name">Découverte géologique</div>
-      <div class="service-desc">Volcans, gorges, grottes, orgues basaltiques… L'Ardèche est un livre d'histoire naturelle à ciel ouvert.</div>
-    </div>
-    <div class="service-item">
-      <div class="service-num">04</div>
-      <div class="service-icon">🍷</div>
-      <div class="service-name">Gastronomie & Terroir</div>
-      <div class="service-desc">Vignerons, fromagers, producteurs de châtaignes — je vous emmène à la rencontre des artisans qui font l'Ardèche authentique.</div>
-    </div>
-    <div class="service-item">
-      <div class="service-num">05</div>
-      <div class="service-icon">👨‍👩‍👧</div>
-      <div class="service-name">Sorties familles</div>
-      <div class="service-desc">Adaptées aux enfants, ludiques et pédagogiques. L'Ardèche fascine les petits autant que les grands.</div>
-    </div>
-    <div class="service-item">
-      <div class="service-num">06</div>
-      <div class="service-icon">🌙</div>
-      <div class="service-name">Soirées & couchers de soleil</div>
-      <div class="service-desc">Les belvédères secrets au coucher du soleil, les étoiles depuis les hauts plateaux — des moments hors du commun.</div>
-    </div>
-  </div>
-</section>
-
-<!-- CIRCUITS -->
-<section class="section" id="circuits">
-  <div data-reveal>
-    <div class="section-label">Explorations Majeures</div>
-    <h2 class="section-title">4 Grands Circuits<br><em>d'Exception</em></h2>
-  </div>
-
-  <div class="circuits-grid" data-reveal>
-
-    <!-- Circuit 1 — Villages de Caractère -->
-    <div class="circuit-card">
-      <div class="circuit-img">
-        <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=600&q=80" alt="Villages de Caractère Ardèche" loading="lazy">
-        <div class="circuit-badge">~ 65 KM · 4-5 JOURS</div>
-      </div>
-      <div class="circuit-body">
-        <div class="circuit-name">Le Grand Tour des Villages de Caractère</div>
-        <div class="circuit-desc">Un voyage dans le temps reliant Vogüé, Balazuc, Labeaume et Ruoms. Ruelles pavées, châteaux médiévaux et falaises calcaires.</div>
-        <div class="circuit-tip">
-          <strong>💡 Logistique améliorée</strong>
-          • <em>Échappatoire :</em> Accessible en bus (Aubenas-Alès) pour écourter une étape.<br>
-          • <em>Terroir :</em> Dégustation du cépage local "Chatus" à Ruoms.
-        </div>
-      </div>
-    </div>
-
-    <!-- Circuit 2 — Sucs et Volcans -->
-    <div class="circuit-card">
-      <div class="circuit-img">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Sucs et Volcans Ardèche" loading="lazy">
-        <div class="circuit-badge">~ 50 KM · 3 JOURS</div>
-      </div>
-      <div class="circuit-body">
-        <div class="circuit-name">La Haute-Route des Sucs et Volcans</div>
-        <div class="circuit-desc">Grands espaces sauvages au Nord de l'Ardèche. Passage par le Mont Gerbier-de-Jonc, le Mont Mézenc et les structures mystiques de Borée.</div>
-        <div class="circuit-tip">
-          <strong>💡 Logistique améliorée</strong>
-          • <em>Échappatoire :</em> Refuges proches des axes routiers en cas d'orage sur le plateau.<br>
-          • <em>Terroir :</em> Pause auberge pour savourer le Fin Gras du Mézenc.
-        </div>
-      </div>
-    </div>
-
-    <!-- Circuit 3 — Gorges et Canyons -->
-    <div class="circuit-card">
-      <div class="circuit-img">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Gorges et Canyons Ardèche" loading="lazy">
-        <div class="circuit-badge">~ 42 KM · 3 JOURS</div>
-      </div>
-      <div class="circuit-body">
-        <div class="circuit-name">La Traversée des Gorges et Canyons Secrets</div>
-        <div class="circuit-desc">Randonnée sportive dans les spectaculaires Gorges du Chassezac, le Bois de Païolive et jusqu'au village isolé de Thines.</div>
-        <div class="circuit-tip">
-          <strong>💡 Logistique améliorée</strong>
-          • <em>Échappatoire :</em> Boucles modulables à Païolive pour raccourcir l'étape si besoin.<br>
-          • <em>Terroir :</em> Marché des Vans le samedi (Picodon et miel de châtaignier).
-        </div>
-      </div>
-    </div>
-
-    <!-- Circuit 4 — Merveilles Cachées -->
-    <div class="circuit-card">
-      <div class="circuit-img">
-        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80" alt="Merveilles Cachées Ardèche" loading="lazy">
-        <div class="circuit-badge">~ 48 KM · 3 JOURS</div>
-      </div>
-      <div class="circuit-body">
-        <div class="circuit-name">Le Tour des Merveilles Cachées</div>
-        <div class="circuit-desc">Découverte de l'Ardèche Cévenole : la coulée basaltique géante de Jaujac, le mythique Pont du Diable à Thueyts et Meyras.</div>
-        <div class="circuit-tip">
-          <strong>💡 Logistique améliorée</strong>
-          • <em>Échappatoire :</em> Ligne de bus TER dans la vallée le long de la RN102 en cas de pépin.<br>
-          • <em>Terroir :</em> Produits AOP à la châtaigne d'Ardèche et bière locale à Jaujac.
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- LIEUX INSOLITES SCROLL -->
-<div class="insolite-strip">
-  <div class="insolite-strip-title" data-reveal>L'Ardèche <em>insolite</em> & secrète</div>
-  <div class="insolite-scroll">
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&q=80" alt="Grotte de Saint-Marcel" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Spéléologie</div>
-        Grotte de Saint-Marcel
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&q=80" alt="Village de schiste" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Patrimoine</div>
-        Villages de schiste noir
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&q=80" alt="Lac Issarlès" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Volcanisme</div>
-        Lac d'Issarlès, cratère volcanique
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400&q=80" alt="Orgues basaltiques" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Géologie</div>
-        Orgues basaltiques de Jaujac
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&q=80" alt="Dolmen Ardèche" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Préhistoire</div>
-        Dolmens & menhirs secrets
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1504233529578-6d46baba6d34?w=400&q=80" alt="Nuit étoilée Ardèche" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Astronomie</div>
-        Ciel étoilé des Cévennes
-      </div>
-    </div>
-    <div class="insolite-item">
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&q=80" alt="Châtaignier centenaire" loading="lazy">
-      <div class="insolite-item-label">
-        <div class="insolite-item-tag">Nature</div>
-        Châtaigniers centenaires
-      </div>
-    </div>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><span>●</span>ChatGPT & Prompts</span>
+    <span class="ticker-item"><span>●</span>Réseaux de Neurones</span>
+    <span class="ticker-item"><span>●</span>Machine Learning</span>
+    <span class="ticker-item"><span>●</span>Transformers & LLMs</span>
+    <span class="ticker-item"><span>●</span>IA Générative</span>
+    <span class="ticker-item"><span>●</span>Vision par Ordinateur</span>
+    <span class="ticker-item"><span>●</span>Deep Learning</span>
+    <span class="ticker-item"><span>●</span>RAG & Embeddings</span>
+    <span class="ticker-item"><span>●</span>Fine-tuning</span>
+    <span class="ticker-item"><span>●</span>Éthique de l'IA</span>
+    <!-- repeat for infinite loop -->
+    <span class="ticker-item"><span>●</span>ChatGPT & Prompts</span>
+    <span class="ticker-item"><span>●</span>Réseaux de Neurones</span>
+    <span class="ticker-item"><span>●</span>Machine Learning</span>
+    <span class="ticker-item"><span>●</span>Transformers & LLMs</span>
+    <span class="ticker-item"><span>●</span>IA Générative</span>
+    <span class="ticker-item"><span>●</span>Vision par Ordinateur</span>
+    <span class="ticker-item"><span>●</span>Deep Learning</span>
+    <span class="ticker-item"><span>●</span>RAG & Embeddings</span>
+    <span class="ticker-item"><span>●</span>Fine-tuning</span>
+    <span class="ticker-item"><span>●</span>Éthique de l'IA</span>
   </div>
 </div>
 
-<!-- TARIFS -->
-<section class="section" id="pricing">
-  <div data-reveal>
-    <div class="section-label">Tarifs</div>
-    <h2 class="section-title">Des prix <em>clairs</em>, sans surprise</h2>
-    <p style="color:#2a4a38;font-size:.95rem;max-width:560px;line-height:1.8;margin-top:.75rem;">
-      Pour ce premier mois de lancement, je propose <strong style="color:#1e6e44">−20% sur toutes les formules</strong>. 
-      Une façon de vous accueillir et de partager ma passion pour l'Ardèche à un tarif exceptionnel.
-    </p>
-  </div>
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-grid reveal">
+      <div>
+        <span class="section-label">Pourquoi apprendre l'IA maintenant</span>
+        <h2 class="section-title">Le monde change.<br>Prends de l'avance.</h2>
+        <p class="section-sub">L'IA n'est plus une option — c'est le moteur de l'économie du futur. Mais 90% des gens ne comprennent pas comment ça marche vraiment.</p>
 
-  <div class="launch-banner" data-reveal>
-    🎉 Offre de lancement — Juin 2025 — 20% de réduction sur toutes les formules — Places limitées
-  </div>
-
-  <div class="pricing-grid" data-reveal>
-
-    <!-- Demi-journée -->
-    <div class="pricing-card">
-      <div class="pricing-label">Découverte</div>
-      <div class="pricing-name">Demi-journée</div>
-      <div class="price-block">
-        <span class="price-original">50 € / pers.</span>
-        <span class="price-promo">40 €<span class="price-unit"> / pers.</span></span>
-        <span class="price-save">−20 % ce mois-ci</span>
+        <div class="why-features" style="margin-top:2.5rem">
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <div>
+              <h3>Pédagogie sans jargon</h3>
+              <p>Des explications claires, des analogies du quotidien, zéro baratin technique incompréhensible.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📈</div>
+            <div>
+              <h3>Progression structurée</h3>
+              <p>Du guide débutant au niveau expert, chaque ebook s'appuie sur le précédent. Pas de saut dans le vide.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔧</div>
+            <div>
+              <h3>Applications concrètes</h3>
+              <p>Chaque concept est illustré par des cas réels : automatisation, création de contenu, analyse de données.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔄</div>
+            <div>
+              <h3>Mises à jour incluses</h3>
+              <p>L'IA évolue vite. Tes ebooks aussi. Toutes les mises à jour futures sont offertes à vie.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="font-size:.72rem;color:#3a6b4e;margin-top:.4rem;">Groupe : à partir de 150 € (jusqu'à 8 pers.)</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>3 à 4 heures de découverte guidée</li>
-        <li>Jusqu'à 8 personnes</li>
-        <li>Thème au choix : nature, patrimoine, géologie</li>
-        <li>Eau et petit matériel fournis</li>
-        <li>Pique-nique local en option (+8 €/pers.)</li>
-      </ul>
-      <div class="pricing-note">Tarif habituel : 50 €/pers. — 150 € groupe. Offre valable tout juin.</div>
-    </div>
 
-    <!-- Journée complète — featured -->
-    <div class="pricing-card featured">
-      <div class="pricing-label">★ Le plus demandé</div>
-      <div class="pricing-name">Journée Complète</div>
-      <div class="price-block">
-        <span class="price-original">90 € / pers.</span>
-        <span class="price-promo">72 €<span class="price-unit"> / pers.</span></span>
-        <span class="price-save">−20 % ce mois-ci</span>
+      <div class="why-visual reveal">
+        <div class="brain-diagram">
+          <div class="node node-center">Modèle<br>LLM</div>
+          <div class="node node-1">Données<br>entraîn.</div>
+          <div class="node node-2">Prompt<br>Input</div>
+          <div class="node node-3">Réseau<br>neurones</div>
+          <div class="node node-4">Réponse<br>Output</div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem">// Architecture simplifiée d'un LLM</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);line-height:1.8">
+            Input → Tokenization<br>
+            Tokens → Embeddings<br>
+            Embeddings → Attention<br>
+            Attention → Prédiction
+          </div>
+        </div>
       </div>
-      <div style="font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.4rem;">Groupe : à partir de 250 € (jusqu'à 10 pers.)</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>7 à 8 heures d'immersion totale</li>
-        <li>Circuit personnalisé sur mesure</li>
-        <li>Pique-nique terroir inclus</li>
-        <li>Adaptation météo en temps réel</li>
-        <li>Photos souvenirs partagées</li>
-        <li>Carnet de route offert</li>
-      </ul>
-      <div class="pricing-note">Tarif habituel : 90 €/pers. — 250 € groupe. Offre valable tout juin.</div>
     </div>
-
-    <!-- Multi-jours -->
-    <div class="pricing-card">
-      <div class="pricing-label">Immersion</div>
-      <div class="pricing-name">Séjour Multi-jours</div>
-      <div class="price-block">
-        <span class="price-original">150 € / pers. / jour</span>
-        <span class="price-promo">120 €<span class="price-unit"> / pers. / jour</span></span>
-        <span class="price-save">−20 % ce mois-ci</span>
-      </div>
-      <div style="font-size:.72rem;color:#3a6b4e;margin-top:.4rem;">Hébergements partenaires en sus — devis sur demande</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>2 à 5 jours d'exploration complète</li>
-        <li>Hébergements sélectionnés avec soin</li>
-        <li>Logistique complète prise en charge</li>
-        <li>Rencontres avec producteurs locaux</li>
-        <li>Carnet de route personnalisé</li>
-        <li>Groupe jusqu'à 12 personnes</li>
-      </ul>
-      <div class="pricing-note">Tarif habituel : 150 €/pers./j. Devis personnalisé selon groupe et durée.</div>
-    </div>
-
-  </div>
-
-  <!-- Note bas de page -->
-  <div data-reveal style="margin-top:2rem;padding:1.25rem 1.5rem;border-left:3px solid #1e6e44;background:#f2f8f4;max-width:680px;font-size:.82rem;color:#2a4a38;line-height:1.7;">
-    <strong style="color:#1e6e44;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:.4rem;">ℹ️ Bon à savoir</strong>
-    Tarifs indicatifs par personne pour un groupe de 2 à 4. Réductions possibles pour les familles nombreuses, groupes scolaires et associations. 
-    Paiement à la sortie — chèque, virement ou espèces. <strong>Aucun acompte demandé pour les réservations de juin.</strong>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="contact-left" data-reveal>
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Parlons de votre<br><em>Ardèche idéale</em></h2>
-
-    <div class="contact-info-item">
-      <div class="contact-info-icon">📍</div>
-      <div>
-        <div class="contact-info-label">Secteur</div>
-        <div class="contact-info-value">Ardèche · Département 07</div>
-      </div>
+<!-- EBOOKS -->
+<section class="ebooks" id="ebooks">
+  <div class="container">
+    <div class="ebooks-header reveal">
+      <span class="section-label">Nos formations</span>
+      <h2 class="section-title">Quatre niveaux.<br>Une seule destination.</h2>
+      <p class="section-sub">Commence gratuitement. Progresse à ton rythme. Deviens celui qui comprend là où les autres subissent.</p>
     </div>
 
-    <div class="contact-info-item">
-      <div class="contact-info-icon">📧</div>
-      <div>
-        <div class="contact-info-label">Email</div>
-        <div class="contact-info-value">
-          <a href="mailto:guide.ardeche.touriste@gmail.com">guide.ardeche.touriste@gmail.com</a>
+    <div class="ebooks-grid">
+
+      <!-- FREE EBOOK -->
+      <div class="ebook-free reveal">
+        <div class="free-content">
+          <span class="ebook-tier tier-free-label">⚡ Gratuit — Ebook #1</span>
+          <h3 class="ebook-title">L'IA Expliquée à<br>Tout le Monde</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-1"></div></div>
+            <span class="level-label">DÉBUTANT</span>
+          </div>
+          <p class="ebook-desc">
+            Tu as entendu parler de ChatGPT, de Midjourney, de l'IA partout — mais tu ne sais pas vraiment comment ça fonctionne ? Ce guide est fait pour toi. En 60 pages simples et visuelles, tu vas enfin comprendre ce qu'est l'intelligence artificielle, pourquoi tout le monde en parle, et comment tu peux l'utiliser dès demain.
+          </p>
+          <ul class="ebook-chapters">
+            <li>C'est quoi l'intelligence artificielle ? (vraiment)</li>
+            <li>Comment une machine « apprend » à parler</li>
+            <li>ChatGPT, Claude, Gemini — les différences clés</li>
+            <li>10 choses concrètes que tu peux faire avec l'IA aujourd'hui</li>
+            <li>Les limites à connaître pour ne pas se faire avoir</li>
+            <li>L'IA va-t-elle prendre mon emploi ? La vraie réponse</li>
+          </ul>
+          <div class="ebook-price">
+            <span class="price-main">0€</span>
+            <span class="price-sub">— Téléchargement immédiat</span>
+          </div>
+          <button class="btn-ebook btn-free" onclick="openModal('free')">📥 Télécharger gratuitement</button>
+        </div>
+        <div class="free-visual">
+          <div class="free-visual-bg"></div>
+          <div style="position:relative;z-index:1;text-align:center;padding:2rem">
+            <div style="font-size:4rem;margin-bottom:1rem">🤖</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:0.75rem">L'IA Expliquée<br>à Tout le Monde</div>
+            <div style="font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace">NeuralPath — Guide #1</div>
+            <div style="margin-top:1.5rem;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:8px;padding:0.75rem">
+              <div style="font-size:0.7rem;color:var(--muted)">📖 60 pages · Format PDF</div>
+              <div style="font-size:0.7rem;color:var(--muted);margin-top:0.25rem">🔓 100% gratuit, sans engagement</div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- EBOOK 2 — STARTER -->
+      <div class="ebook-card tier-starter reveal">
+        <div class="ebook-cover cover-starter">
+          <div class="cover-icon">⚙️</div>
+          <div class="cover-title">Sous le Capot<br>de l'IA</div>
+          <div class="cover-author">NeuralPath · Guide #2</div>
+        </div>
+        <span class="ebook-tier tier-starter-label">📗 Starter — Ebook #2</span>
+        <h3 class="ebook-title">Sous le Capot de l'IA</h3>
+        <div class="level-bar">
+          <span class="level-label">NIVEAU</span>
+          <div class="level-track"><div class="level-fill fill-2"></div></div>
+          <span class="level-label">INTERMÉDIAIRE</span>
+        </div>
+        <p class="ebook-desc">
+          Tu comprends les bases — maintenant plonge dans le moteur. Comment fonctionnent les réseaux de neurones, le machine learning, et pourquoi les modèles font ce qu'ils font. Avec des schémas et des exemples qui rendent tout lumineux.
+        </p>
+        <ul class="ebook-chapters">
+          <li>Les neurones artificiels expliqués simplement</li>
+          <li>Supervised, Unsupervised, Reinforcement Learning</li>
+          <li>Comment un modèle s'entraîne sur des données</li>
+          <li>Qu'est-ce qu'un token, un embedding, un vecteur ?</li>
+          <li>Biais, surapprentissage — les pièges à éviter</li>
+          <li>Exercice pratique : analyser une IA en action</li>
+        </ul>
+        <div class="ebook-price">
+          <span class="price-main">19€</span>
+          <span class="price-sub">— Accès à vie + mises à jour</span>
+        </div>
+        <button class="btn-ebook btn-starter" onclick="openModal('starter')">🛒 Obtenir cet ebook</button>
+      </div>
+
+      <!-- EBOOK 3 — PRO -->
+      <div class="ebook-card tier-pro reveal" style="position:relative">
+        <div class="popular-badge">⭐ Le plus populaire</div>
+        <div class="ebook-cover cover-pro">
+          <div class="cover-icon">🧠</div>
+          <div class="cover-title">Maîtriser les<br>LLMs & Prompts</div>
+          <div class="cover-author">NeuralPath · Guide #3</div>
+        </div>
+        <span class="ebook-tier tier-pro-label">💜 Pro — Ebook #3</span>
+        <h3 class="ebook-title">Maîtriser les LLMs<br>& l'Art du Prompt</h3>
+        <div class="level-bar">
+          <span class="level-label">NIVEAU</span>
+          <div class="level-track"><div class="level-fill fill-3"></div></div>
+          <span class="level-label">AVANCÉ</span>
+        </div>
+        <p class="ebook-desc">
+          Les Large Language Models transforment tout. Comprends leur architecture Transformer, maîtrise le prompt engineering comme un expert, et apprends à orchestrer des agents IA pour automatiser ton travail.
+        </p>
+        <ul class="ebook-chapters">
+          <li>Architecture Transformer détaillée (attention, positional encoding)</li>
+          <li>Le prompt engineering de A à Z — 20+ techniques</li>
+          <li>RAG : augmenter un LLM avec tes propres données</li>
+          <li>Agents IA et chaînes de raisonnement (Chain-of-Thought)</li>
+          <li>API OpenAI & Anthropic : mise en pratique</li>
+          <li>Construire ton premier pipeline IA automatisé</li>
+        </ul>
+        <div class="ebook-price">
+          <span class="price-main">39€</span>
+          <span class="price-sub">— Accès à vie + ressources bonus</span>
+        </div>
+        <button class="btn-ebook btn-pro" onclick="openModal('pro')">🛒 Obtenir cet ebook</button>
+      </div>
+
+      <!-- EBOOK 4 — EXPERT -->
+      <div class="ebook-card tier-expert reveal" style="grid-column: 1 / -1">
+        <div style="display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start">
+          <div class="ebook-cover cover-expert" style="margin-bottom:0">
+            <div class="cover-icon">🔬</div>
+            <div class="cover-title">Expert IA<br>Architecture &<br>Déploiement</div>
+            <div class="cover-author">NeuralPath · Guide #4</div>
+          </div>
+          <div>
+            <span class="ebook-tier tier-expert-label">🏆 Expert — Ebook #4</span>
+            <h3 class="ebook-title">Expert IA : Architecture,<br>Fine-tuning & Déploiement</h3>
+            <div class="level-bar">
+              <span class="level-label">NIVEAU</span>
+              <div class="level-track"><div class="level-fill fill-4"></div></div>
+              <span class="level-label">EXPERT</span>
+            </div>
+            <p class="ebook-desc">
+              Le guide ultime pour ceux qui veulent aller au bout. Fine-tuner un modèle, construire une architecture IA de production, comprendre RLHF, LoRA, multimodal, et les dernières avancées de la recherche. Ce livre est la référence.
+            </p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.5rem;margin-bottom:1.5rem">
+              <div class="ebook-chapters" style="margin-bottom:0">
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Fine-tuning : LoRA, QLoRA, PEFT en détail</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>RLHF — comment on aligne un modèle</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Multimodal : texte + image + audio</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Déploiement : Docker, cloud, optimisation</li>
+              </div>
+              <div class="ebook-chapters" style="margin-bottom:0">
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Évaluation et benchmarks des modèles</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Sécurité IA : jailbreaks, red teaming</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Étude de cas : reproduire GPT à petite échelle</li>
+                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Lectures de papers : comment décoder la recherche</li>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
+              <div class="ebook-price" style="margin-bottom:0">
+                <span class="price-main">69€</span>
+                <span class="price-sub">— Accès à vie · Bonus communauté</span>
+              </div>
+              <button class="btn-ebook btn-expert" style="width:auto;padding:.8rem 2rem" onclick="openModal('expert')">🛒 Obtenir l'édition Expert</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="contact-info-item">
-      <div class="contact-info-icon">🕐</div>
-      <div>
-        <div class="contact-info-label">Disponibilités</div>
-        <div class="contact-info-value">Toute l'année · 7j/7</div>
-      </div>
-    </div>
-
-    <a class="contact-cta-call" href="tel:0748169803">
-      <div class="contact-cta-call-icon">📞</div>
-      <div class="contact-cta-call-text">
-        <strong>Appel direct</strong>
-        <span>07 48 16 98 03</span>
-      </div>
-    </a>
-
-    <a class="contact-cta-call" href="mailto:guide.ardeche.touriste@gmail.com" style="margin-top:.75rem;background:#f2f8f4;border-color:rgba(30,110,68,0.3);">
-      <div class="contact-cta-call-icon">✉️</div>
-      <div class="contact-cta-call-text" style="color:#0f2a1a;">
-        <strong style="color:#1e6e44;">Envoyer un e-mail à Pierre-François</strong>
-        <span style="font-size:.9rem;font-family:'Josefin Sans',sans-serif;color:#2a4a38;">guide.ardeche.touriste@gmail.com</span>
-      </div>
-    </a>
-  </div>
-
-  <div data-reveal>
-    <div class="contact-form-title">Écrivez-moi,<br><em>je vous réponds vite</em></div>
-
-    <!-- Formspree form -->
-    <form action="https://formspree.io/f/guide.ardeche.touriste@gmail.com" method="POST">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Prénom</label>
-          <input class="form-input" type="text" name="prenom" placeholder="Votre prénom" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Nom</label>
-          <input class="form-input" type="text" name="nom" placeholder="Votre nom" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" name="email" placeholder="votre@email.com" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Téléphone</label>
-        <input class="form-input" type="tel" name="telephone" placeholder="06 xx xx xx xx">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Type de visite souhaitée</label>
-        <input class="form-input" type="text" name="type_visite" placeholder="Randonnée, village, famille, géologie…">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-textarea" name="message" placeholder="Dites-moi ce que vous souhaitez découvrir, vos dates, la taille de votre groupe…" required></textarea>
-      </div>
-      <input type="hidden" name="_subject" value="Nouvelle demande de visite — Guide Ardèche">
-      <input type="hidden" name="_replyto" value="guide.ardeche.touriste@gmail.com">
-      <input type="hidden" name="_to" value="guide.ardeche.touriste@gmail.com">
-      <button class="form-submit" type="submit">→ Envoyer ma demande</button>
-    </form>
   </div>
 </section>
 
-<!-- MENTIONS LÉGALES -->
-<section id="mentions">
-  <div class="section">
-    <div class="mentions-title" data-reveal>Mentions légales</div>
-    <div class="mentions-text" data-reveal>
-      <strong>Responsable de la publication :</strong> Pierre François Passager, Accompagnateur Touristique indépendant — Ardèche (07).<br><br>
-      <strong>Activité :</strong> Accompagnateur de tourisme, déclaré auprès des autorités compétentes. Numéro SIRET disponible sur demande.<br><br>
-      <strong>Hébergement du site :</strong> GitHub Pages — GitHub, Inc., 88 Colin P Kelly Jr Street, San Francisco, CA 94107, USA.<br><br>
-      <strong>Propriété intellectuelle :</strong> L'ensemble du contenu de ce site (textes, visuels, structure) est protégé. Toute reproduction est interdite sans accord écrit préalable.<br><br>
-      <strong>Données personnelles :</strong> Les informations collectées via le formulaire de contact sont utilisées uniquement pour répondre à vos demandes et ne sont jamais transmises à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de modification et de suppression de vos données. Demande à adresser par email.<br><br>
-      <strong>Cookies :</strong> Ce site n'utilise pas de cookies de suivi ou de ciblage publicitaire.
+<!-- GUARANTEE -->
+<div class="guarantee">
+  <span>🛡️</span>
+  <span><strong>Garantie satisfait ou remboursé 30 jours</strong> — Si les ebooks payants ne t'apportent rien de concret, on te rembourse. Sans question.</span>
+</div>
+
+<!-- APPRENDRE -->
+<section class="learn" id="apprendre">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-label">Le programme en détail</span>
+      <h2 class="section-title" style="margin-bottom:.5rem">Ce que tu vas vraiment<br>apprendre</h2>
+      <p class="section-sub" style="margin:0 auto">Des connaissances actionnables, pas des buzzwords. Chaque concept expliqué jusqu'à ce que ça clique.</p>
     </div>
+
+    <div class="learn-grid">
+      <div class="learn-card reveal">
+        <div class="learn-number">01</div>
+        <h3>Comment l'IA « apprend »</h3>
+        <p>La descente de gradient, les fonctions de perte, la rétropropagation — expliqués avec des exemples concrets. Tu comprendras pourquoi une IA peut se tromper et comment elle s'améliore.</p>
+      </div>
+      <div class="learn-card reveal">
+        <div class="learn-number">02</div>
+        <h3>L'architecture Transformer</h3>
+        <p>Le mécanisme d'attention qui a tout changé. Tu vas comprendre pourquoi GPT-4, Claude et Gemini fonctionnent tous sur le même principe fondamental.</p>
+      </div>
+      <div class="learn-card reveal">
+        <div class="learn-number">03</div>
+        <h3>Prompt Engineering avancé</h3>
+        <p>Chain-of-Thought, Few-shot, Role-playing, Tree-of-Thought… Les techniques qui font la différence entre un résultat moyen et un résultat exceptionnel.</p>
+      </div>
+      <div class="learn-card reveal">
+        <div class="learn-number">04</div>
+        <h3>RAG & données privées</h3>
+        <p>Comment connecter un LLM à tes propres documents pour créer une IA personnalisée. Embeddings, bases vectorielles, retrieval — de A à Z.</p>
+      </div>
+      <div class="learn-card reveal">
+        <div class="learn-number">05</div>
+        <h3>Fine-tuning de modèles</h3>
+        <p>LoRA, QLoRA, instruction tuning — les techniques pour spécialiser un modèle open source sur ta tâche précise, même avec un budget limité.</p>
+      </div>
+      <div class="learn-card reveal">
+        <div class="learn-number">06</div>
+        <h3>IA en production</h3>
+        <p>Déployer, monitorer, optimiser. Les LLMs coûtent cher à faire tourner — tu apprendras à choisir la bonne architecture et à scaler intelligemment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="temoignages">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-label">Ils sont passés à l'action</span>
+      <h2 class="section-title">Ce que disent<br>nos lecteurs</h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« J'avais peur que ce soit trop technique. Mais le premier guide m'a réconciliée avec l'IA en 2 heures. J'ai ensuite pris les 3 ebooks payants d'une traite. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent)">ML</div>
+          <div>
+            <div class="testi-name">Marie-Laure B.</div>
+            <div class="testi-role">Responsable Marketing, Lyon</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Le guide Pro sur les LLMs est une pépite. J'ai enfin compris l'attention mechanism après des mois à ne pas y arriver avec des ressources en anglais. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent2)">TK</div>
+          <div>
+            <div class="testi-name">Thomas K.</div>
+            <div class="testi-role">Développeur Backend, Paris</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« J'ai monté mon premier pipeline RAG en suivant l'ebook Expert. Ça m'a pris 2 semaines, là où j'estimais 3 mois. La valeur est ridicule par rapport au prix. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--accent3)">SA</div>
+          <div>
+            <div class="testi-name">Samir A.</div>
+            <div class="testi-role">Entrepreneur, Bordeaux</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★☆</div>
+        <p class="testi-text">« Très bon niveau de vulgarisation. On sent que les auteurs connaissent leur sujet ET savent enseigner — ce qui est rare dans le domaine de l'IA. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green)">JR</div>
+          <div>
+            <div class="testi-name">Julie R.</div>
+            <div class="testi-role">Data Analyst, Toulouse</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Le free book seul vaut la peine. Je l'ai partagé à toute ma famille qui se demandait ce qu'est l'IA. Maintenant je passe au niveau 2. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#e11d48)">CM</div>
+          <div>
+            <div class="testi-name">Clément M.</div>
+            <div class="testi-role">Prof de SVT, Nantes</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« J'avais déjà de l'expérience en ML mais le guide Expert m'a appris des choses sur le fine-tuning que je ne trouvais que dans des papers académiques. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#0ea5e9">LP</div>
+          <div>
+            <div class="testi-name">Léa P.</div>
+            <div class="testi-role">ML Engineer, Remote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-label">Questions fréquentes</span>
+      <h2 class="section-title">On anticipe<br>tes doutes</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Faut-il avoir des connaissances en programmation pour profiter des guides ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Non. Les deux premiers guides (Gratuit et Starter) sont entièrement accessibles sans aucune notion de code. Le guide Pro introduit des exemples de code Python simples avec des explications ligne par ligne. L'ebook Expert suppose une familiarité basique avec Python. Si tu débutes vraiment, commence par le guide gratuit — tu verras vite où tu en es.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Comment reçois-je les ebooks après achat ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Immédiatement ! Après paiement, tu reçois un email avec un lien de téléchargement sécurisé. Les ebooks sont en format PDF haute qualité, lisibles sur tous les appareils (ordinateur, tablette, liseuse, smartphone). Le lien est valable à vie et tu peux re-télécharger autant de fois que tu veux.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          La garantie 30 jours fonctionne comment concrètement ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Simple : si dans les 30 jours suivant ton achat tu estimes que l'ebook ne t'a pas apporté de valeur, tu envoies un email à contact@neuralpath.io avec ton numéro de commande et tu es remboursé dans les 48h. Aucune question, aucun formulaire à remplir.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Les mises à jour sont-elles vraiment incluses à vie ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Oui. L'IA évolue à toute vitesse. Chaque fois qu'une mise à jour majeure est publiée (nouveau modèle important, nouvelle technique, correction), tu reçois un email avec le lien de téléchargement de la nouvelle version, gratuitement. Ça fait partie du deal.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Dois-je acheter les ebooks dans l'ordre ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Fortement recommandé, surtout pour les premiers. Chaque guide s'appuie sur les concepts du précédent. Si tu as déjà des bases solides en ML, tu peux commencer directement au Pro ou Expert, mais la lecture du guide Starter t'assurera de n'avoir aucun angle mort dans ta compréhension.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Y a-t-il une version bundle avec tous les ebooks ?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Oui ! Le Bundle Complet (Starter + Pro + Expert) est disponible à 99€ au lieu de 127€ — soit 28€ d'économie. Il suffit de sélectionner l'option "Bundle" dans le formulaire de commande. Le guide gratuit est bien sûr inclus à part entière.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <span class="section-label" style="display:block;margin-bottom:.75rem">Prêt à passer à l'action ?</span>
+  <h2>Le meilleur moment<br>pour comprendre l'IA,<br>c'est <span>maintenant</span>.</h2>
+  <p>Commence avec le guide gratuit. Aucune carte bancaire requise. Aucune obligation. Juste la connaissance.</p>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+    <button class="btn-primary" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="openModal('free')">📥 Télécharger gratuitement</button>
+    <a href="#ebooks" class="btn-ghost">Voir tous les guides →</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Pierre François Passager</div>
-  <ul class="footer-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#services">Prestations</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#mentions">Mentions légales</a></li>
-  </ul>
-  <div class="footer-copy">© 2025 · Accompagnateur Touristique Ardèche</div>
+  <div class="footer-inner">
+    <div class="footer-logo">Neural<span>Path</span></div>
+    <ul class="footer-links">
+      <li><a href="#ebooks">Formations</a></li>
+      <li><a href="#apprendre">Programme</a></li>
+      <li><a href="#temoignages">Avis</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="mailto:contact@neuralpath.io">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 NeuralPath · Mentions légales · CGV</p>
+  </div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script>
-// Reveal on scroll
+// ── FAQ ──
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── LEMON SQUEEZY CHECKOUT LINKS ──
+const checkoutLinks = {
+  free:    'https://neuralpath.lemonsqueezy.com/checkout/buy/afc0332f-5a16-42d7-b48d-4e5c482e7994',
+  starter: 'https://neuralpath.lemonsqueezy.com/checkout/buy/57d61549-b733-458f-b53f-b110c97f7fe3',
+  pro:     'https://neuralpath.lemonsqueezy.com/checkout/buy/3686e986-4169-4b80-a031-2586e48d4164',
+  expert:  'https://neuralpath.lemonsqueezy.com/checkout/buy/311a9cbe-8820-43ab-87a1-8369dcc410d4'
+};
+
+function openModal(type) {
+  window.open(checkoutLinks[type], '_blank');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target.id === 'modal') closeModal();
+}
+
+function formatExpiry(input) {
+  let v = input.value.replace(/\D/g, '').substring(0, 4);
+  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
+  input.value = v;
+}
+
+// ── SCROLL REVEAL ──
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08 });
 
-document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Nav scroll effect
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── NAV ACTIVE ──
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
-  if (window.scrollY > 60) {
-    nav.style.background = 'rgba(255,255,255,0.99)';
-    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+  if (window.scrollY > 50) {
+    nav.style.borderBottomColor = 'rgba(30,45,66,0.8)';
   } else {
-    nav.style.background = 'rgba(255,255,255,0.96)';
-    nav.style.boxShadow = '0 1px 20px rgba(0,0,0,0.08)';
+    nav.style.borderBottomColor = 'var(--border)';
   }
 });
 </script>
-
 </body>
 </html>
