@@ -3,1049 +3,445 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeuralPath — Maîtrise l'IA, Façonne ton Futur</title>
+<title>NeuralPath — Boutique</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
-  :root {
-    --black: #080a0f;
-    --deep: #0d1117;
-    --surface: #111827;
-    --card: #151d2b;
-    --border: #1e2d42;
-    --accent: #00e5ff;
-    --accent2: #7c3aed;
-    --accent3: #f59e0b;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --white: #f8fafc;
-    --green: #10b981;
-    --red: #f43f5e;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(8, 10, 15, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 0.1em;
-    color: var(--white);
-  }
-  .logo span { color: var(--accent); }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-
-  .nav-cta {
-    background: var(--accent);
-    color: var(--black) !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 4px;
-    font-weight: 700 !important;
-    transition: opacity 0.2s !important;
-  }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.25);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    animation: fadeSlideDown 0.6s ease both;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.5); }
-  }
-
-  .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 10vw, 9rem);
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    color: var(--white);
-    margin-bottom: 1.5rem;
-    animation: fadeSlideDown 0.7s ease 0.1s both;
-  }
-
-  .hero h1 em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-sub {
-    font-size: 1.2rem;
-    color: var(--muted);
-    max-width: 580px;
-    margin: 0 auto 2.5rem;
-    font-weight: 300;
-    animation: fadeSlideDown 0.7s ease 0.2s both;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeSlideDown 0.7s ease 0.3s both;
-  }
-
-  @keyframes fadeSlideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #0099cc);
-    color: var(--black);
-    padding: 0.9rem 2rem;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 30px rgba(0,229,255,0.3);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 50px rgba(0,229,255,0.5);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    padding: 0.9rem 2rem;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    justify-content: center;
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
-    animation: fadeSlideDown 0.7s ease 0.4s both;
-  }
-
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--white);
-    line-height: 1;
-  }
-  .stat-num span { color: var(--accent); }
-  .stat-label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 0.25rem;
-  }
-
-  /* ── SECTION COMMONS ── */
-  section { padding: 6rem 2rem; }
-  .container { max-width: 1200px; margin: 0 auto; }
-
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1;
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-
-  .section-sub {
-    color: var(--muted);
-    font-size: 1.05rem;
-    max-width: 520px;
-    font-weight: 300;
-  }
-
-  /* ── WHY SECTION ── */
-  .why { background: var(--deep); }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-top: 4rem;
-  }
-
-  .why-features { display: flex; flex-direction: column; gap: 2rem; }
-
-  .feature-item {
-    display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
-  }
-
-  .feature-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    background: rgba(0,229,255,0.08);
-    border: 1px solid rgba(0,229,255,0.15);
-  }
-
-  .feature-item h3 {
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-  }
-  .feature-item p { color: var(--muted); font-size: 0.9rem; }
-
-  .why-visual {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .why-visual::before {
-    content: '';
-    position: absolute;
-    top: -50px; right: -50px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
-  }
-
-  .brain-diagram {
-    width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .node {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--deep);
-    border: 2px solid var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--accent);
-    text-align: center;
-    padding: 0.25rem;
-    animation: nodeFloat 3s ease-in-out infinite;
-  }
-
-  .node-center { width: 90px; height: 90px; font-size: 0.7rem; border-color: var(--accent); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0s; }
-  .node-1 { width: 65px; height: 65px; top: 10%; left: 10%; animation-delay: 0.5s; border-color: var(--accent2); color: var(--accent2); }
-  .node-2 { width: 70px; height: 70px; top: 10%; right: 10%; animation-delay: 1s; border-color: #f59e0b; color: #f59e0b; }
-  .node-3 { width: 60px; height: 60px; bottom: 10%; left: 15%; animation-delay: 1.5s; border-color: var(--green); color: var(--green); }
-  .node-4 { width: 68px; height: 68px; bottom: 10%; right: 10%; animation-delay: 2s; border-color: var(--red); color: var(--red); }
-
-  @keyframes nodeFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .node-center { animation-name: none; }
-
-  .connection {
-    position: absolute;
-    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
-    height: 1px;
-    transform-origin: left center;
-  }
-
-  /* ── EBOOKS SECTION ── */
-  .ebooks { background: var(--black); }
-
-  .ebooks-header { margin-bottom: 4rem; }
-
-  .ebooks-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  /* FREE EBOOK — full width */
-  .ebook-free {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(124,58,237,0.05));
-    border: 1px solid rgba(0,229,255,0.25);
-    border-radius: 16px;
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .ebook-free:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,229,255,0.1);
-  }
-
-  .ebook-free::before {
-    content: 'GRATUIT';
-    position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    background: var(--accent);
-    color: var(--black);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    padding: 0.3rem 0.8rem;
-    border-radius: 100px;
-  }
-
-  .ebook-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    cursor: pointer;
-  }
-
-  .ebook-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
-  }
-
-  .ebook-card.tier-starter:hover { border-color: var(--green); box-shadow: 0 24px 60px rgba(16,185,129,0.15); }
-  .ebook-card.tier-pro:hover { border-color: var(--accent2); box-shadow: 0 24px 60px rgba(124,58,237,0.15); }
-  .ebook-card.tier-expert:hover { border-color: var(--accent3); box-shadow: 0 24px 60px rgba(245,158,11,0.15); }
-
-  .ebook-cover {
-    border-radius: 10px;
-    aspect-ratio: 3/4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-  }
-
-  .cover-free { background: linear-gradient(135deg, #0d1117, #00e5ff15); border: 1px solid rgba(0,229,255,0.3); }
-  .cover-starter { background: linear-gradient(135deg, #0d1117, #10b98115); border: 1px solid rgba(16,185,129,0.3); }
-  .cover-pro { background: linear-gradient(135deg, #0d1117, #7c3aed20); border: 1px solid rgba(124,58,237,0.3); }
-  .cover-expert { background: linear-gradient(135deg, #0d1117, #f59e0b15); border: 1px solid rgba(245,158,11,0.3); }
-
-  .cover-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .cover-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 0 1rem;
-    line-height: 1.2;
-    color: var(--white);
-  }
-  .cover-author {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-top: 0.5rem;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .ebook-tier {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-  .tier-free-label { color: var(--accent); }
-  .tier-starter-label { color: var(--green); }
-  .tier-pro-label { color: var(--accent2); }
-  .tier-expert-label { color: var(--accent3); }
-
-  .ebook-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-
-  .ebook-desc {
-    font-size: 0.875rem;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-    line-height: 1.7;
-  }
-
-  .ebook-chapters {
-    list-style: none;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .ebook-chapters li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .ebook-chapters li::before {
-    content: '→';
-    color: var(--accent);
-    font-size: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  .ebook-price {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .price-main {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
-    color: var(--white);
-  }
-  .price-sub {
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-
-  .btn-ebook {
-    display: block;
-    text-align: center;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-  }
-
-  .btn-free { background: rgba(0,229,255,0.12); color: var(--accent); border: 1px solid rgba(0,229,255,0.3); }
-  .btn-free:hover { background: var(--accent); color: var(--black); }
-  .btn-starter { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
-  .btn-starter:hover { background: var(--green); color: var(--black); }
-  .btn-pro { background: rgba(124,58,237,0.12); color: var(--accent2); border: 1px solid rgba(124,58,237,0.3); }
-  .btn-pro:hover { background: var(--accent2); color: var(--white); }
-  .btn-expert { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.3); }
-  .btn-expert:hover { background: var(--accent3); color: var(--black); }
-
-  /* FREE BOOK — big layout */
-  .free-content { display: flex; flex-direction: column; }
-  .free-visual {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    aspect-ratio: 3/4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .free-visual-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,229,255,0.05) 0%, rgba(124,58,237,0.08) 100%);
-  }
-
-  /* ── WHAT YOU LEARN ── */
-  .learn { background: var(--deep); }
-
-  .learn-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .learn-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-    transition: border-color 0.3s;
-  }
-  .learn-card:hover { border-color: rgba(0,229,255,0.3); }
-
-  .learn-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: rgba(0,229,255,0.12);
-    line-height: 1;
-    margin-bottom: 0.75rem;
-  }
-
-  .learn-card h3 {
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-  .learn-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
-
-  /* ── TESTIMONIALS ── */
-  .testimonials { background: var(--black); }
-
-  .testi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .testi-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-  }
-
-  .testi-stars {
-    color: var(--accent3);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-  }
-
-  .testi-text {
-    font-size: 0.9rem;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-    font-style: italic;
-  }
-
-  .testi-author {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .testi-avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: var(--black);
-    flex-shrink: 0;
-  }
-
-  .testi-name { font-weight: 600; font-size: 0.875rem; color: var(--white); }
-  .testi-role { font-size: 0.75rem; color: var(--muted); }
-
-  /* ── FAQ ── */
-  .faq { background: var(--deep); }
-
-  .faq-list {
-    max-width: 720px;
-    margin: 3rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .faq-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .faq-q {
-    padding: 1.25rem 1.5rem;
-    font-weight: 600;
-    color: var(--white);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.95rem;
-    user-select: none;
-    transition: color 0.2s;
-  }
-  .faq-q:hover { color: var(--accent); }
-
-  .faq-q .arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-    color: var(--muted);
-  }
-
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.35s ease;
-  }
-  .faq-a-inner {
-    padding: 0 1.5rem 1.25rem;
-    font-size: 0.875rem;
-    color: var(--muted);
-    line-height: 1.8;
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-  }
-
-  .faq-item.open .faq-a { max-height: 400px; }
-  .faq-item.open .arrow { transform: rotate(45deg); color: var(--accent); }
-
-  /* ── CTA FINAL ── */
-  .cta-final {
-    background: var(--black);
-    text-align: center;
-    padding: 8rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-final::before {
-    content: '';
-    position: absolute;
-    width: 800px; height: 800px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .cta-final h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 7vw, 6rem);
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  .cta-final h2 span { color: var(--accent); }
-  .cta-final p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--deep);
-    border-top: 1px solid var(--border);
-    padding: 3rem 2rem;
-  }
-
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-  }
-
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--white);
-  }
-  .footer-logo span { color: var(--accent); }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  .footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--accent); }
-
-  .footer-copy {
-    color: var(--muted);
-    font-size: 0.8rem;
-  }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-
-  .modal {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    max-width: 480px;
-    width: 100%;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.3s;
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-
-  .modal-close {
-    position: absolute;
-    top: 1.25rem; right: 1.25rem;
-    background: var(--border);
-    border: none;
-    color: var(--muted);
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
-  .modal-close:hover { background: var(--surface); color: var(--white); }
-
-  .modal h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  .modal p { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.75rem; }
-
-  .modal-form { display: flex; flex-direction: column; gap: 1rem; }
-
-  .modal-form input, .modal-form select {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.85rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.2s;
-    outline: none;
-    width: 100%;
-  }
-  .modal-form input:focus, .modal-form select:focus { border-color: var(--accent); }
-  .modal-form input::placeholder { color: var(--muted); }
-
-  .modal-btn {
-    background: var(--accent);
-    color: var(--black);
-    border: none;
-    padding: 0.9rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .modal-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-  .modal-guarantee {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-top: 0.5rem;
-    justify-content: center;
-  }
-
-  /* ── PROGRESS BAR (reading level) ── */
-  .level-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .level-label { font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
-  .level-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .level-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
-  .fill-1 { width: 20%; background: var(--accent); }
-  .fill-2 { width: 50%; background: var(--green); }
-  .fill-3 { width: 78%; background: var(--accent2); }
-  .fill-4 { width: 98%; background: var(--accent3); }
-
-  /* ── POPULAR BADGE ── */
-  .popular-badge {
-    position: absolute;
-    top: -1px; left: 50%; transform: translateX(-50%);
-    background: var(--accent2);
-    color: var(--white);
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.75rem;
-    border-radius: 0 0 8px 8px;
-  }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .why-grid, .ebooks-grid { grid-template-columns: 1fr; }
-    .ebook-free { grid-template-columns: 1fr; }
-    .learn-grid, .testi-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-  }
-
-  /* ── TICKER ── */
-  .ticker-wrap {
-    background: rgba(0,229,255,0.04);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    padding: 0.6rem 0;
-    white-space: nowrap;
-  }
-  .ticker {
-    display: inline-flex;
-    gap: 3rem;
-    animation: ticker 25s linear infinite;
-  }
-  .ticker-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-  .ticker-item span { color: var(--accent); margin-right: 0.5rem; }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ── GUARANTEE BAND ── */
-  .guarantee {
-    background: rgba(16,185,129,0.05);
-    border-top: 1px solid rgba(16,185,129,0.15);
-    border-bottom: 1px solid rgba(16,185,129,0.15);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-  .guarantee strong { color: var(--green); }
-
+:root {
+  --black:   #080a0f;
+  --deep:    #0d1117;
+  --surface: #111827;
+  --card:    #151d2b;
+  --border:  #1e2d42;
+  --accent:  #00e5ff;
+  --accent2: #7c3aed;
+  --accent3: #f59e0b;
+  --text:    #e2e8f0;
+  --muted:   #64748b;
+  --white:   #f8fafc;
+  --green:   #10b981;
+  --red:     #f43f5e;
+  --ls:      #ff6154;   /* LemonSqueezy brand */
+  --gr:      #ff90e8;   /* Gumroad brand */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 4rem;
+  background: rgba(8,10,15,0.88);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: .1em; color: var(--white); text-decoration: none; }
+.logo span { color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-right a { color: var(--muted); text-decoration: none; font-size: .85rem; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; transition: color .2s; }
+.nav-right a:hover { color: var(--accent); }
+.nav-badge { background: var(--accent); color: var(--black); padding: .35rem 1rem; border-radius: 4px; font-weight: 700 !important; color: var(--black) !important; }
+
+/* ── HERO BOUTIQUE ── */
+.hero {
+  padding: 10rem 2rem 5rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,229,255,.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,229,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+}
+.hero-glow {
+  position: absolute; width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(0,229,255,.07); border: 1px solid rgba(0,229,255,.22);
+  padding: .35rem 1rem; border-radius: 100px;
+  font-size: .75rem; font-weight: 600; color: var(--accent);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.75rem;
+  animation: fadeUp .6s ease both;
+}
+.hero-eyebrow::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  line-height: .95; letter-spacing: .02em; color: var(--white);
+  margin-bottom: 1.25rem;
+  animation: fadeUp .7s ease .1s both;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 auto 3rem;
+  font-weight: 300; animation: fadeUp .7s ease .2s both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── FILTER TABS ── */
+.filter-bar {
+  display: flex; justify-content: center; gap: .5rem;
+  flex-wrap: wrap; margin-bottom: 4rem;
+  animation: fadeUp .7s ease .3s both;
+}
+.filter-btn {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: .8rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+  padding: .55rem 1.4rem; border-radius: 100px; cursor: pointer;
+  transition: all .22s; display: flex; align-items: center; gap: .4rem;
+}
+.filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--white); background: rgba(0,229,255,.07); }
+.filter-btn.active { box-shadow: 0 0 18px rgba(0,229,255,.18); }
+.filter-dot { width: 7px; height: 7px; border-radius: 50%; }
+.dot-all    { background: var(--white); }
+.dot-ia     { background: var(--accent2); }
+.dot-biz    { background: var(--accent3); }
+
+/* ── MAIN SHOP ── */
+.shop { padding: 0 2rem 7rem; }
+.container { max-width: 1220px; margin: 0 auto; }
+
+/* ── SECTION HEADING ── */
+.section-head {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2rem; padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-head-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.sh-ls { background: rgba(255,97,84,.12); border: 1px solid rgba(255,97,84,.25); }
+.sh-gr { background: rgba(255,144,232,.12); border: 1px solid rgba(255,144,232,.25); }
+.section-head-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; margin-bottom: .15rem;
+}
+.label-ls { color: var(--ls); }
+.label-gr { color: var(--gr); }
+.section-head h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); line-height: 1;
+}
+.section-spacer { margin-top: 5rem; }
+
+/* ── PLATFORM PILL ── */
+.platform-pill {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: .25rem .7rem; border-radius: 100px; position: absolute; top: 1.1rem; right: 1.1rem;
+}
+.pill-ls { background: rgba(255,97,84,.15); border: 1px solid rgba(255,97,84,.3); color: var(--ls); }
+.pill-gr { background: rgba(255,144,232,.15); border: 1px solid rgba(255,144,232,.3); color: var(--gr); }
+
+/* ── PRODUCT GRID ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.products-grid.has-featured { grid-template-columns: repeat(3, 1fr); }
+
+/* ── PRODUCT CARD ── */
+.product-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.75rem; position: relative;
+  display: flex; flex-direction: column;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  cursor: pointer; overflow: hidden;
+}
+.product-card::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  transition: opacity .3s; pointer-events: none;
+}
+.product-card:hover { transform: translateY(-5px); }
+
+/* tier colors */
+.card-free:hover    { border-color: rgba(0,229,255,.5); box-shadow: 0 20px 60px rgba(0,229,255,.12); }
+.card-starter:hover { border-color: rgba(16,185,129,.5); box-shadow: 0 20px 60px rgba(16,185,129,.12); }
+.card-pro:hover     { border-color: rgba(124,58,237,.5); box-shadow: 0 20px 60px rgba(124,58,237,.12); }
+.card-expert:hover  { border-color: rgba(245,158,11,.5); box-shadow: 0 20px 60px rgba(245,158,11,.12); }
+.card-biz:hover     { border-color: rgba(255,144,232,.4); box-shadow: 0 20px 60px rgba(255,144,232,.1); }
+
+/* FEATURED — span 2 columns */
+.product-card.featured {
+  grid-column: span 2;
+}
+.product-card.featured .card-inner {
+  display: grid; grid-template-columns: 180px 1fr; gap: 2rem; align-items: start;
+}
+
+/* ── CARD COVER ── */
+.card-cover {
+  border-radius: 10px; aspect-ratio: 3/4;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin-bottom: 1.5rem; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.06);
+}
+.cover-free    { background: linear-gradient(135deg,#0d1117,rgba(0,229,255,.1)); }
+.cover-starter { background: linear-gradient(135deg,#0d1117,rgba(16,185,129,.1)); }
+.cover-pro     { background: linear-gradient(135deg,#0d1117,rgba(124,58,237,.12)); }
+.cover-expert  { background: linear-gradient(135deg,#0d1117,rgba(245,158,11,.1)); }
+.cover-biz1    { background: linear-gradient(135deg,#0d1117,rgba(255,144,232,.1)); }
+.cover-biz2    { background: linear-gradient(135deg,#0d1117,rgba(0,229,255,.08),rgba(255,144,232,.08)); }
+.cover-biz3    { background: linear-gradient(135deg,#0d1117,rgba(245,158,11,.1)); }
+.cover-biz4    { background: linear-gradient(135deg,#0d1117,rgba(124,58,237,.1)); }
+
+.cover-emoji { font-size: 2.8rem; margin-bottom: .7rem; }
+.cover-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem; text-align: center;
+  padding: 0 1rem; line-height: 1.2; color: var(--white);
+}
+.cover-subtitle { font-size: .65rem; color: var(--muted); margin-top: .4rem; font-family: 'DM Mono', monospace; }
+
+/* ── CARD CONTENT ── */
+.card-tier {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: .4rem; display: block;
+}
+.tier-free    { color: var(--accent); }
+.tier-starter { color: var(--green); }
+.tier-pro     { color: var(--accent2); }
+.tier-expert  { color: var(--accent3); }
+.tier-biz     { color: var(--gr); }
+
+.card-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white);
+  line-height: 1.1; margin-bottom: .6rem;
+}
+.card-desc {
+  font-size: .85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; flex: 1;
+}
+
+/* ── LEVEL BAR ── */
+.level-bar { display: flex; align-items: center; gap: .5rem; margin-bottom: 1rem; }
+.level-label { font-size: .65rem; color: var(--muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
+.level-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.level-fill { height: 100%; border-radius: 2px; }
+.fill-1 { width: 18%; background: var(--accent); }
+.fill-2 { width: 48%; background: var(--green); }
+.fill-3 { width: 76%; background: var(--accent2); }
+.fill-4 { width: 98%; background: var(--accent3); }
+.fill-biz { width: 60%; background: var(--gr); }
+
+/* ── FEATURES LIST ── */
+.card-features {
+  list-style: none; display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1.5rem;
+}
+.card-features li {
+  display: flex; align-items: flex-start; gap: .5rem;
+  font-size: .8rem; color: var(--muted); line-height: 1.5;
+}
+.card-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: .75rem; margin-top: .05rem; }
+
+/* ── PRICE ── */
+.card-price {
+  display: flex; align-items: baseline; gap: .5rem; margin-bottom: 1.1rem;
+}
+.price-main { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--white); }
+.price-old {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+  color: var(--muted); text-decoration: line-through;
+}
+.price-note { font-size: .78rem; color: var(--muted); }
+
+/* ── CTA BUTTON ── */
+.btn-card {
+  display: block; text-align: center; padding: .8rem 1.4rem; border-radius: 8px;
+  font-weight: 700; font-size: .88rem; text-decoration: none;
+  transition: all .2s; cursor: pointer; border: none; width: 100%;
+  font-family: 'DM Sans', sans-serif; letter-spacing: .02em;
+}
+.btn-free    { background: rgba(0,229,255,.1); color: var(--accent); border: 1px solid rgba(0,229,255,.28); }
+.btn-free:hover { background: var(--accent); color: var(--black); }
+.btn-starter { background: rgba(16,185,129,.1); color: var(--green); border: 1px solid rgba(16,185,129,.28); }
+.btn-starter:hover { background: var(--green); color: var(--black); }
+.btn-pro     { background: rgba(124,58,237,.1); color: var(--accent2); border: 1px solid rgba(124,58,237,.28); }
+.btn-pro:hover { background: var(--accent2); color: var(--white); }
+.btn-expert  { background: rgba(245,158,11,.1); color: var(--accent3); border: 1px solid rgba(245,158,11,.28); }
+.btn-expert:hover { background: var(--accent3); color: var(--black); }
+.btn-biz     { background: rgba(255,144,232,.1); color: var(--gr); border: 1px solid rgba(255,144,232,.28); }
+.btn-biz:hover { background: var(--gr); color: var(--black); }
+.btn-biz-main { background: linear-gradient(135deg,rgba(255,144,232,.18),rgba(124,58,237,.18)); color: var(--white); border: 1px solid rgba(255,144,232,.3); }
+.btn-biz-main:hover { background: linear-gradient(135deg,var(--gr),var(--accent2)); }
+
+/* ── POPULAR BADGE ── */
+.popular-badge {
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--accent2); color: var(--white);
+  font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  padding: .18rem .75rem; border-radius: 0 0 8px 8px;
+}
+.hot-badge {
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--accent3), var(--ls));
+  color: var(--black);
+  font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  padding: .18rem .75rem; border-radius: 0 0 8px 8px;
+}
+
+/* ── FREE BADGE ── */
+.free-badge {
+  position: absolute; top: -1px; right: 1.5rem;
+  background: var(--accent); color: var(--black);
+  font-size: .62rem; font-weight: 800; letter-spacing: .1em;
+  padding: .18rem .75rem; border-radius: 0 0 8px 8px;
+}
+
+/* ── GUARANTEE BAR ── */
+.guarantee {
+  background: rgba(16,185,129,.05);
+  border: 1px solid rgba(16,185,129,.14);
+  border-radius: 12px; padding: 1rem 1.75rem;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: .85rem; color: var(--muted); margin-top: 3rem; text-align: center;
+}
+.guarantee strong { color: var(--green); }
+
+/* ── STATS ── */
+.stats-row {
+  display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+  padding: 3.5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  margin-bottom: 5rem;
+}
+.stat { text-align: center; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--white); line-height: 1; }
+.stat-num span { color: var(--accent); }
+.stat-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: .2rem; }
+
+/* ── TELEGRAM BAND ── */
+.telegram-band {
+  background: linear-gradient(135deg,rgba(0,229,255,.05),rgba(124,58,237,.05));
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 2.5rem 2rem; text-align: center; margin-top: 5rem;
+}
+.telegram-band .t-emoji { font-size: 2rem; margin-bottom: .5rem; }
+.telegram-band h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); margin-bottom: .4rem; }
+.telegram-band p { font-size: .9rem; color: var(--muted); margin-bottom: 1.4rem; }
+.btn-telegram {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--accent); color: var(--black);
+  padding: .8rem 2rem; border-radius: 8px;
+  font-weight: 700; font-size: .95rem; text-decoration: none;
+  box-shadow: 0 0 28px rgba(0,229,255,.25); transition: all .2s;
+}
+.btn-telegram:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,229,255,.4); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 2rem 2rem; border-top: 1px solid var(--border);
+}
+.footer-inner {
+  max-width: 1220px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); }
+.footer-logo span { color: var(--accent); }
+.footer-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: .82rem; transition: color .2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-copy { font-size: .78rem; color: var(--muted); }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  background: rgba(0,229,255,.03);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  overflow: hidden; padding: .55rem 0; white-space: nowrap; margin-bottom: 5rem;
+}
+.ticker { display: inline-flex; gap: 3rem; animation: ticker 28s linear infinite; }
+.ticker-item { font-family: 'DM Mono', monospace; font-size: .72rem; color: var(--muted); letter-spacing: .05em; }
+.ticker-item span { color: var(--accent); margin-right: .4rem; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HIDDEN (filter) ── */
+.product-card.hidden { display: none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-right .nav-link { display: none; }
+  .products-grid.has-featured { grid-template-columns: 1fr 1fr; }
+  .product-card.featured { grid-column: span 2; }
+  .product-card.featured .card-inner { grid-template-columns: 1fr; }
+}
+@media(max-width: 680px) {
+  .products-grid, .products-grid.has-featured { grid-template-columns: 1fr; }
+  .product-card.featured { grid-column: span 1; }
+  .stats-row { gap: 1.25rem; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Neural<span>Path</span></div>
-  <ul class="nav-links">
-    <li><a href="#why">Pourquoi l'IA</a></li>
-    <li><a href="#ebooks">Formations</a></li>
-    <li><a href="#apprendre">Programme</a></li>
-    <li><a href="#temoignages">Avis</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#ebooks" class="nav-cta">Commencer →</a></li>
-  </ul>
+  <a href="#" class="logo">Neural<span>Path</span></a>
+  <div class="nav-right">
+    <a href="#ia" class="nav-link">Ebooks IA</a>
+    <a href="#business" class="nav-link">Business</a>
+    <a href="https://t.me/neuralpathia" target="_blank" class="nav-link">Telegram</a>
+    <a href="https://t.me/neuralpathia" target="_blank" class="nav-badge">Rejoindre →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <div class="hero-eyebrow">🛒 Boutique Officielle</div>
+  <h1>Toutes nos<br><em>Formations</em></h1>
+  <p class="hero-sub">Des ebooks IA aux formations business — tout ce qu'il faut pour comprendre l'intelligence artificielle et scaler ton activité.</p>
 
-  <div class="hero-badge">🧠 Comprendre l'IA — Dès Aujourd'hui</div>
-
-  <h1>Maîtrise<br><em>l'Intelligence</em><br>Artificielle</h1>
-
-  <p class="hero-sub">
-    De zéro à expert. Des guides clairs, progressifs et captivants pour comprendre vraiment comment fonctionne l'IA — et comment en tirer parti dans ta vie et ta carrière.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#ebooks" class="btn-primary">📚 Voir les formations</a>
-    <a href="#ebooks" class="btn-ghost">Télécharger gratuitement</a>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">4<span>+</span></div>
-      <div class="stat-label">Guides complets</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">2<span>k</span></div>
-      <div class="stat-label">Lecteurs actifs</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">98<span>%</span></div>
-      <div class="stat-label">Satisfaction</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">0<span>€</span></div>
-      <div class="stat-label">Pour commencer</div>
-    </div>
+  <!-- FILTER TABS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="filter('all',this)">
+      <span class="filter-dot dot-all"></span> Tous les produits
+    </button>
+    <button class="filter-btn" data-filter="ia" onclick="filter('ia',this)">
+      <span class="filter-dot dot-ia"></span> Formations IA
+    </button>
+    <button class="filter-btn" data-filter="business" onclick="filter('business',this)">
+      <span class="filter-dot dot-biz"></span> Business & Productivité
+    </button>
   </div>
 </section>
 
@@ -1053,472 +449,336 @@
 <div class="ticker-wrap">
   <div class="ticker">
     <span class="ticker-item"><span>●</span>ChatGPT & Prompts</span>
-    <span class="ticker-item"><span>●</span>Réseaux de Neurones</span>
     <span class="ticker-item"><span>●</span>Machine Learning</span>
     <span class="ticker-item"><span>●</span>Transformers & LLMs</span>
     <span class="ticker-item"><span>●</span>IA Générative</span>
-    <span class="ticker-item"><span>●</span>Vision par Ordinateur</span>
+    <span class="ticker-item"><span>●</span>Scale sans recruter</span>
+    <span class="ticker-item"><span>●</span>Productivité x3</span>
     <span class="ticker-item"><span>●</span>Deep Learning</span>
     <span class="ticker-item"><span>●</span>RAG & Embeddings</span>
     <span class="ticker-item"><span>●</span>Fine-tuning</span>
-    <span class="ticker-item"><span>●</span>Éthique de l'IA</span>
-    <!-- repeat for infinite loop -->
+    <span class="ticker-item"><span>●</span>Feuille de route entrepreneur</span>
     <span class="ticker-item"><span>●</span>ChatGPT & Prompts</span>
-    <span class="ticker-item"><span>●</span>Réseaux de Neurones</span>
     <span class="ticker-item"><span>●</span>Machine Learning</span>
     <span class="ticker-item"><span>●</span>Transformers & LLMs</span>
     <span class="ticker-item"><span>●</span>IA Générative</span>
-    <span class="ticker-item"><span>●</span>Vision par Ordinateur</span>
+    <span class="ticker-item"><span>●</span>Scale sans recruter</span>
+    <span class="ticker-item"><span>●</span>Productivité x3</span>
     <span class="ticker-item"><span>●</span>Deep Learning</span>
     <span class="ticker-item"><span>●</span>RAG & Embeddings</span>
     <span class="ticker-item"><span>●</span>Fine-tuning</span>
-    <span class="ticker-item"><span>●</span>Éthique de l'IA</span>
+    <span class="ticker-item"><span>●</span>Feuille de route entrepreneur</span>
   </div>
 </div>
 
-<!-- WHY -->
-<section class="why" id="why">
-  <div class="container">
-    <div class="why-grid reveal">
-      <div>
-        <span class="section-label">Pourquoi apprendre l'IA maintenant</span>
-        <h2 class="section-title">Le monde change.<br>Prends de l'avance.</h2>
-        <p class="section-sub">L'IA n'est plus une option — c'est le moteur de l'économie du futur. Mais 90% des gens ne comprennent pas comment ça marche vraiment.</p>
+<!-- STATS -->
+<div class="stats-row reveal">
+  <div class="stat"><div class="stat-num">8<span>+</span></div><div class="stat-label">Produits disponibles</div></div>
+  <div class="stat"><div class="stat-num">2<span>k</span></div><div class="stat-label">Apprenants actifs</div></div>
+  <div class="stat"><div class="stat-num">98<span>%</span></div><div class="stat-label">Satisfaction</div></div>
+  <div class="stat"><div class="stat-num">30<span>j</span></div><div class="stat-label">Garantie remboursement</div></div>
+</div>
 
-        <div class="why-features" style="margin-top:2.5rem">
-          <div class="feature-item">
-            <div class="feature-icon">⚡</div>
-            <div>
-              <h3>Pédagogie sans jargon</h3>
-              <p>Des explications claires, des analogies du quotidien, zéro baratin technique incompréhensible.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">📈</div>
-            <div>
-              <h3>Progression structurée</h3>
-              <p>Du guide débutant au niveau expert, chaque ebook s'appuie sur le précédent. Pas de saut dans le vide.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🔧</div>
-            <div>
-              <h3>Applications concrètes</h3>
-              <p>Chaque concept est illustré par des cas réels : automatisation, création de contenu, analyse de données.</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🔄</div>
-            <div>
-              <h3>Mises à jour incluses</h3>
-              <p>L'IA évolue vite. Tes ebooks aussi. Toutes les mises à jour futures sont offertes à vie.</p>
-            </div>
-          </div>
+<!-- SHOP -->
+<section class="shop">
+  <div class="container">
+
+    <!-- ══ SECTION 1 : EBOOKS IA (LemonSqueezy) ══ -->
+    <div id="ia" class="reveal">
+      <div class="section-head">
+        <div class="section-head-icon sh-ls">🍋</div>
+        <div>
+          <div class="section-head-label label-ls">via LemonSqueezy</div>
+          <h2>Formations Intelligence Artificielle</h2>
         </div>
       </div>
 
-      <div class="why-visual reveal">
-        <div class="brain-diagram">
-          <div class="node node-center">Modèle<br>LLM</div>
-          <div class="node node-1">Données<br>entraîn.</div>
-          <div class="node node-2">Prompt<br>Input</div>
-          <div class="node node-3">Réseau<br>neurones</div>
-          <div class="node node-4">Réponse<br>Output</div>
-        </div>
-        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
-          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem">// Architecture simplifiée d'un LLM</div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);line-height:1.8">
-            Input → Tokenization<br>
-            Tokens → Embeddings<br>
-            Embeddings → Attention<br>
-            Attention → Prédiction
+      <div class="products-grid has-featured">
+
+        <!-- CARD 1 — FREE -->
+        <div class="product-card card-free reveal" data-cat="ia">
+          <div class="free-badge">GRATUIT</div>
+          <span class="platform-pill pill-ls">🍋 LemonSqueezy</span>
+          <div class="card-cover cover-free">
+            <div class="cover-emoji">🤖</div>
+            <div class="cover-title">L'IA Expliquée<br>à Tout le Monde</div>
+            <div class="cover-subtitle">NeuralPath · Guide #1</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EBOOKS -->
-<section class="ebooks" id="ebooks">
-  <div class="container">
-    <div class="ebooks-header reveal">
-      <span class="section-label">Nos formations</span>
-      <h2 class="section-title">Quatre niveaux.<br>Une seule destination.</h2>
-      <p class="section-sub">Commence gratuitement. Progresse à ton rythme. Deviens celui qui comprend là où les autres subissent.</p>
-    </div>
-
-    <div class="ebooks-grid">
-
-      <!-- FREE EBOOK -->
-      <div class="ebook-free reveal">
-        <div class="free-content">
-          <span class="ebook-tier tier-free-label">⚡ Gratuit — Ebook #1</span>
-          <h3 class="ebook-title">L'IA Expliquée à<br>Tout le Monde</h3>
+          <span class="card-tier tier-free">⚡ Gratuit — Guide #1</span>
+          <h3 class="card-title">L'IA Expliquée<br>à Tout le Monde</h3>
           <div class="level-bar">
             <span class="level-label">NIVEAU</span>
             <div class="level-track"><div class="level-fill fill-1"></div></div>
             <span class="level-label">DÉBUTANT</span>
           </div>
-          <p class="ebook-desc">
-            Tu as entendu parler de ChatGPT, de Midjourney, de l'IA partout — mais tu ne sais pas vraiment comment ça fonctionne ? Ce guide est fait pour toi. En 60 pages simples et visuelles, tu vas enfin comprendre ce qu'est l'intelligence artificielle, pourquoi tout le monde en parle, et comment tu peux l'utiliser dès demain.
-          </p>
-          <ul class="ebook-chapters">
-            <li>C'est quoi l'intelligence artificielle ? (vraiment)</li>
-            <li>Comment une machine « apprend » à parler</li>
-            <li>ChatGPT, Claude, Gemini — les différences clés</li>
-            <li>10 choses concrètes que tu peux faire avec l'IA aujourd'hui</li>
-            <li>Les limites à connaître pour ne pas se faire avoir</li>
-            <li>L'IA va-t-elle prendre mon emploi ? La vraie réponse</li>
+          <p class="card-desc">En 60 pages simples et visuelles, comprends enfin ce qu'est l'IA, pourquoi tout le monde en parle, et comment l'utiliser dès demain. Aucune notion technique requise.</p>
+          <ul class="card-features">
+            <li>C'est quoi l'IA — vraiment</li>
+            <li>Comment une machine apprend à parler</li>
+            <li>ChatGPT vs Claude vs Gemini</li>
+            <li>10 usages concrets dès aujourd'hui</li>
           </ul>
-          <div class="ebook-price">
-            <span class="price-main">0€</span>
-            <span class="price-sub">— Téléchargement immédiat</span>
+          <div class="card-price">
+            <span class="price-main">0 €</span>
+            <span class="price-note">— Téléchargement immédiat</span>
           </div>
-          <button class="btn-ebook btn-free" onclick="openModal('free')">📥 Télécharger gratuitement</button>
+          <a href="https://neuralpath.lemonsqueezy.com/checkout/buy/afc0332f-5a16-42d7-b48d-4e5c482e7994" target="_blank" class="btn-card btn-free">📥 Télécharger gratuitement</a>
         </div>
-        <div class="free-visual">
-          <div class="free-visual-bg"></div>
-          <div style="position:relative;z-index:1;text-align:center;padding:2rem">
-            <div style="font-size:4rem;margin-bottom:1rem">🤖</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);line-height:1.1;margin-bottom:0.75rem">L'IA Expliquée<br>à Tout le Monde</div>
-            <div style="font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace">NeuralPath — Guide #1</div>
-            <div style="margin-top:1.5rem;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:8px;padding:0.75rem">
-              <div style="font-size:0.7rem;color:var(--muted)">📖 60 pages · Format PDF</div>
-              <div style="font-size:0.7rem;color:var(--muted);margin-top:0.25rem">🔓 100% gratuit, sans engagement</div>
+
+        <!-- CARD 2 — STARTER -->
+        <div class="product-card card-starter reveal" data-cat="ia">
+          <span class="platform-pill pill-ls">🍋 LemonSqueezy</span>
+          <div class="card-cover cover-starter">
+            <div class="cover-emoji">⚙️</div>
+            <div class="cover-title">Sous le Capot<br>de l'IA</div>
+            <div class="cover-subtitle">NeuralPath · Guide #2</div>
+          </div>
+          <span class="card-tier tier-starter">📗 Starter — Guide #2</span>
+          <h3 class="card-title">Sous le Capot<br>de l'IA</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-2"></div></div>
+            <span class="level-label">INTERMÉDIAIRE</span>
+          </div>
+          <p class="card-desc">Comment fonctionnent les réseaux de neurones, le machine learning, et pourquoi les modèles font ce qu'ils font. Avec des schémas qui rendent tout lumineux.</p>
+          <ul class="card-features">
+            <li>Neurones artificiels expliqués simplement</li>
+            <li>Supervised · Unsupervised · Reinforcement</li>
+            <li>Token, embedding, vecteur — définis clairement</li>
+            <li>Exercice pratique : analyser une IA en action</li>
+          </ul>
+          <div class="card-price">
+            <span class="price-main">19 €</span>
+            <span class="price-note">— Accès à vie + mises à jour</span>
+          </div>
+          <a href="https://neuralpath.lemonsqueezy.com/checkout/buy/57d61549-b733-458f-b53f-b110c97f7fe3" target="_blank" class="btn-card btn-starter">🛒 Obtenir le guide Starter</a>
+        </div>
+
+        <!-- CARD 3 — PRO (FEATURED — span 2) -->
+        <div class="product-card card-pro featured reveal" data-cat="ia">
+          <div class="popular-badge">⭐ Le plus populaire</div>
+          <span class="platform-pill pill-ls">🍋 LemonSqueezy</span>
+          <div class="card-inner">
+            <div class="card-cover cover-pro" style="margin-bottom:0">
+              <div class="cover-emoji">🧠</div>
+              <div class="cover-title">Maîtriser les<br>LLMs & Prompts</div>
+              <div class="cover-subtitle">NeuralPath · Guide #3</div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- EBOOK 2 — STARTER -->
-      <div class="ebook-card tier-starter reveal">
-        <div class="ebook-cover cover-starter">
-          <div class="cover-icon">⚙️</div>
-          <div class="cover-title">Sous le Capot<br>de l'IA</div>
-          <div class="cover-author">NeuralPath · Guide #2</div>
-        </div>
-        <span class="ebook-tier tier-starter-label">📗 Starter — Ebook #2</span>
-        <h3 class="ebook-title">Sous le Capot de l'IA</h3>
-        <div class="level-bar">
-          <span class="level-label">NIVEAU</span>
-          <div class="level-track"><div class="level-fill fill-2"></div></div>
-          <span class="level-label">INTERMÉDIAIRE</span>
-        </div>
-        <p class="ebook-desc">
-          Tu comprends les bases — maintenant plonge dans le moteur. Comment fonctionnent les réseaux de neurones, le machine learning, et pourquoi les modèles font ce qu'ils font. Avec des schémas et des exemples qui rendent tout lumineux.
-        </p>
-        <ul class="ebook-chapters">
-          <li>Les neurones artificiels expliqués simplement</li>
-          <li>Supervised, Unsupervised, Reinforcement Learning</li>
-          <li>Comment un modèle s'entraîne sur des données</li>
-          <li>Qu'est-ce qu'un token, un embedding, un vecteur ?</li>
-          <li>Biais, surapprentissage — les pièges à éviter</li>
-          <li>Exercice pratique : analyser une IA en action</li>
-        </ul>
-        <div class="ebook-price">
-          <span class="price-main">19€</span>
-          <span class="price-sub">— Accès à vie + mises à jour</span>
-        </div>
-        <button class="btn-ebook btn-starter" onclick="openModal('starter')">🛒 Obtenir cet ebook</button>
-      </div>
-
-      <!-- EBOOK 3 — PRO -->
-      <div class="ebook-card tier-pro reveal" style="position:relative">
-        <div class="popular-badge">⭐ Le plus populaire</div>
-        <div class="ebook-cover cover-pro">
-          <div class="cover-icon">🧠</div>
-          <div class="cover-title">Maîtriser les<br>LLMs & Prompts</div>
-          <div class="cover-author">NeuralPath · Guide #3</div>
-        </div>
-        <span class="ebook-tier tier-pro-label">💜 Pro — Ebook #3</span>
-        <h3 class="ebook-title">Maîtriser les LLMs<br>& l'Art du Prompt</h3>
-        <div class="level-bar">
-          <span class="level-label">NIVEAU</span>
-          <div class="level-track"><div class="level-fill fill-3"></div></div>
-          <span class="level-label">AVANCÉ</span>
-        </div>
-        <p class="ebook-desc">
-          Les Large Language Models transforment tout. Comprends leur architecture Transformer, maîtrise le prompt engineering comme un expert, et apprends à orchestrer des agents IA pour automatiser ton travail.
-        </p>
-        <ul class="ebook-chapters">
-          <li>Architecture Transformer détaillée (attention, positional encoding)</li>
-          <li>Le prompt engineering de A à Z — 20+ techniques</li>
-          <li>RAG : augmenter un LLM avec tes propres données</li>
-          <li>Agents IA et chaînes de raisonnement (Chain-of-Thought)</li>
-          <li>API OpenAI & Anthropic : mise en pratique</li>
-          <li>Construire ton premier pipeline IA automatisé</li>
-        </ul>
-        <div class="ebook-price">
-          <span class="price-main">39€</span>
-          <span class="price-sub">— Accès à vie + ressources bonus</span>
-        </div>
-        <button class="btn-ebook btn-pro" onclick="openModal('pro')">🛒 Obtenir cet ebook</button>
-      </div>
-
-      <!-- EBOOK 4 — EXPERT -->
-      <div class="ebook-card tier-expert reveal" style="grid-column: 1 / -1">
-        <div style="display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start">
-          <div class="ebook-cover cover-expert" style="margin-bottom:0">
-            <div class="cover-icon">🔬</div>
-            <div class="cover-title">Expert IA<br>Architecture &<br>Déploiement</div>
-            <div class="cover-author">NeuralPath · Guide #4</div>
-          </div>
-          <div>
-            <span class="ebook-tier tier-expert-label">🏆 Expert — Ebook #4</span>
-            <h3 class="ebook-title">Expert IA : Architecture,<br>Fine-tuning & Déploiement</h3>
-            <div class="level-bar">
-              <span class="level-label">NIVEAU</span>
-              <div class="level-track"><div class="level-fill fill-4"></div></div>
-              <span class="level-label">EXPERT</span>
-            </div>
-            <p class="ebook-desc">
-              Le guide ultime pour ceux qui veulent aller au bout. Fine-tuner un modèle, construire une architecture IA de production, comprendre RLHF, LoRA, multimodal, et les dernières avancées de la recherche. Ce livre est la référence.
-            </p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.5rem;margin-bottom:1.5rem">
-              <div class="ebook-chapters" style="margin-bottom:0">
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Fine-tuning : LoRA, QLoRA, PEFT en détail</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>RLHF — comment on aligne un modèle</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Multimodal : texte + image + audio</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Déploiement : Docker, cloud, optimisation</li>
+            <div style="display:flex;flex-direction:column;height:100%">
+              <span class="card-tier tier-pro">💜 Pro — Guide #3</span>
+              <h3 class="card-title">Maîtriser les LLMs<br>& l'Art du Prompt</h3>
+              <div class="level-bar">
+                <span class="level-label">NIVEAU</span>
+                <div class="level-track"><div class="level-fill fill-3"></div></div>
+                <span class="level-label">AVANCÉ</span>
               </div>
-              <div class="ebook-chapters" style="margin-bottom:0">
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Évaluation et benchmarks des modèles</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Sécurité IA : jailbreaks, red teaming</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Étude de cas : reproduire GPT à petite échelle</li>
-                <li style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--muted)"><span style="color:var(--accent)">→</span>Lectures de papers : comment décoder la recherche</li>
+              <p class="card-desc">Les Large Language Models transforment tout. Comprends leur architecture Transformer, maîtrise le prompt engineering comme un expert, et apprends à orchestrer des agents IA pour automatiser ton travail.</p>
+              <ul class="card-features" style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1.5rem">
+                <li>Architecture Transformer détaillée</li>
+                <li>20+ techniques de prompt engineering</li>
+                <li>RAG avec tes propres données</li>
+                <li>Agents IA & Chain-of-Thought</li>
+                <li>API OpenAI & Anthropic en pratique</li>
+                <li>Premier pipeline IA automatisé</li>
+              </ul>
+              <div style="flex:1"></div>
+              <div class="card-price">
+                <span class="price-main">39 €</span>
+                <span class="price-note">— Accès à vie + ressources bonus</span>
               </div>
+              <a href="https://neuralpath.lemonsqueezy.com/checkout/buy/3686e986-4169-4b80-a031-2586e48d4164" target="_blank" class="btn-card btn-pro">🛒 Obtenir le guide Pro</a>
             </div>
-            <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
-              <div class="ebook-price" style="margin-bottom:0">
-                <span class="price-main">69€</span>
-                <span class="price-sub">— Accès à vie · Bonus communauté</span>
+          </div>
+        </div>
+
+        <!-- CARD 4 — EXPERT -->
+        <div class="product-card card-expert reveal" data-cat="ia">
+          <span class="platform-pill pill-ls">🍋 LemonSqueezy</span>
+          <div class="card-cover cover-expert">
+            <div class="cover-emoji">🔬</div>
+            <div class="cover-title">Expert IA<br>Fine-tuning &<br>Déploiement</div>
+            <div class="cover-subtitle">NeuralPath · Guide #4</div>
+          </div>
+          <span class="card-tier tier-expert">🏆 Expert — Guide #4</span>
+          <h3 class="card-title">Expert IA : Fine-tuning<br>& Déploiement</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-4"></div></div>
+            <span class="level-label">EXPERT</span>
+          </div>
+          <p class="card-desc">Fine-tuner un modèle, construire une architecture IA de production, comprendre RLHF, LoRA, multimodal. Le guide ultime de référence.</p>
+          <ul class="card-features">
+            <li>Fine-tuning : LoRA, QLoRA, PEFT</li>
+            <li>RLHF — aligner un modèle</li>
+            <li>Déploiement : Docker & cloud</li>
+            <li>Sécurité IA & red teaming</li>
+          </ul>
+          <div class="card-price">
+            <span class="price-main">69 €</span>
+            <span class="price-note">— Accès à vie · Communauté</span>
+          </div>
+          <a href="https://neuralpath.lemonsqueezy.com/checkout/buy/311a9cbe-8820-43ab-87a1-8369dcc410d4" target="_blank" class="btn-card btn-expert">🛒 Obtenir le guide Expert</a>
+        </div>
+
+      </div><!-- /products-grid IA -->
+
+      <div class="guarantee reveal">
+        <span>🛡️</span>
+        <span><strong>Garantie satisfait ou remboursé 30 jours</strong> — Si les guides payants ne t'apportent rien de concret, remboursement intégral sans question. Email : contact@neuralpath.io</span>
+      </div>
+    </div><!-- /section IA -->
+
+
+    <!-- ══ SECTION 2 : BUSINESS (Gumroad) ══ -->
+    <div id="business" class="section-spacer reveal">
+      <div class="section-head">
+        <div class="section-head-icon sh-gr">🍑</div>
+        <div>
+          <div class="section-head-label label-gr">via Gumroad</div>
+          <h2>Formations Business & Productivité</h2>
+        </div>
+      </div>
+
+      <div class="products-grid has-featured">
+
+        <!-- BIZ 1 — Formation Business (FEATURED) -->
+        <div class="product-card card-biz featured reveal" data-cat="business">
+          <div class="hot-badge">🔥 Formation phare</div>
+          <span class="platform-pill pill-gr">🍑 Gumroad</span>
+          <div class="card-inner">
+            <div class="card-cover cover-biz2" style="margin-bottom:0">
+              <div class="cover-emoji">🚀</div>
+              <div class="cover-title">Formation<br>Business en<br>Ligne</div>
+              <div class="cover-subtitle">NeuralPath · Flagship</div>
+            </div>
+            <div style="display:flex;flex-direction:column;height:100%">
+              <span class="card-tier tier-biz">🎯 Formation Complète</span>
+              <h3 class="card-title">NeuralPath — Formation<br>Business en Ligne</h3>
+              <div class="level-bar">
+                <span class="level-label">NIVEAU</span>
+                <div class="level-track"><div class="level-fill fill-biz"></div></div>
+                <span class="level-label">TOUS NIVEAUX</span>
               </div>
-              <button class="btn-ebook btn-expert" style="width:auto;padding:.8rem 2rem" onclick="openModal('expert')">🛒 Obtenir l'édition Expert</button>
+              <p class="card-desc">La formation de référence pour lancer et développer ton business en ligne avec l'IA comme levier principal. Méthodes, outils, systèmes — tout ce qu'il faut pour générer tes premières ventes et automatiser la croissance.</p>
+              <ul class="card-features" style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1.5rem">
+                <li>Lancer ton offre avec l'IA</li>
+                <li>Construire un tunnel de vente</li>
+                <li>Automatiser ton acquisition</li>
+                <li>Créer du contenu à grande échelle</li>
+                <li>Monétiser ton expertise</li>
+                <li>Scalabilité sans frais fixes</li>
+              </ul>
+              <div style="flex:1"></div>
+              <div class="card-price">
+                <span class="price-main">197 €</span>
+                <span class="price-note">— Accès complet à vie · 10 places</span>
+              </div>
+              <a href="https://neuralpath.gumroad.com/l/gkwzn" target="_blank" class="btn-card btn-biz-main">🛒 Rejoindre la formation →</a>
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- GUARANTEE -->
-<div class="guarantee">
-  <span>🛡️</span>
-  <span><strong>Garantie satisfait ou remboursé 30 jours</strong> — Si les ebooks payants ne t'apportent rien de concret, on te rembourse. Sans question.</span>
-</div>
-
-<!-- APPRENDRE -->
-<section class="learn" id="apprendre">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <span class="section-label">Le programme en détail</span>
-      <h2 class="section-title" style="margin-bottom:.5rem">Ce que tu vas vraiment<br>apprendre</h2>
-      <p class="section-sub" style="margin:0 auto">Des connaissances actionnables, pas des buzzwords. Chaque concept expliqué jusqu'à ce que ça clique.</p>
-    </div>
-
-    <div class="learn-grid">
-      <div class="learn-card reveal">
-        <div class="learn-number">01</div>
-        <h3>Comment l'IA « apprend »</h3>
-        <p>La descente de gradient, les fonctions de perte, la rétropropagation — expliqués avec des exemples concrets. Tu comprendras pourquoi une IA peut se tromper et comment elle s'améliore.</p>
-      </div>
-      <div class="learn-card reveal">
-        <div class="learn-number">02</div>
-        <h3>L'architecture Transformer</h3>
-        <p>Le mécanisme d'attention qui a tout changé. Tu vas comprendre pourquoi GPT-4, Claude et Gemini fonctionnent tous sur le même principe fondamental.</p>
-      </div>
-      <div class="learn-card reveal">
-        <div class="learn-number">03</div>
-        <h3>Prompt Engineering avancé</h3>
-        <p>Chain-of-Thought, Few-shot, Role-playing, Tree-of-Thought… Les techniques qui font la différence entre un résultat moyen et un résultat exceptionnel.</p>
-      </div>
-      <div class="learn-card reveal">
-        <div class="learn-number">04</div>
-        <h3>RAG & données privées</h3>
-        <p>Comment connecter un LLM à tes propres documents pour créer une IA personnalisée. Embeddings, bases vectorielles, retrieval — de A à Z.</p>
-      </div>
-      <div class="learn-card reveal">
-        <div class="learn-number">05</div>
-        <h3>Fine-tuning de modèles</h3>
-        <p>LoRA, QLoRA, instruction tuning — les techniques pour spécialiser un modèle open source sur ta tâche précise, même avec un budget limité.</p>
-      </div>
-      <div class="learn-card reveal">
-        <div class="learn-number">06</div>
-        <h3>IA en production</h3>
-        <p>Déployer, monitorer, optimiser. Les LLMs coûtent cher à faire tourner — tu apprendras à choisir la bonne architecture et à scaler intelligemment.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="temoignages">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <span class="section-label">Ils sont passés à l'action</span>
-      <h2 class="section-title">Ce que disent<br>nos lecteurs</h2>
-    </div>
-
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« J'avais peur que ce soit trop technique. Mais le premier guide m'a réconciliée avec l'IA en 2 heures. J'ai ensuite pris les 3 ebooks payants d'une traite. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent)">ML</div>
-          <div>
-            <div class="testi-name">Marie-Laure B.</div>
-            <div class="testi-role">Responsable Marketing, Lyon</div>
+        <!-- BIZ 2 — Scale IA 2025 -->
+        <div class="product-card card-biz reveal" data-cat="business">
+          <span class="platform-pill pill-gr">🍑 Gumroad</span>
+          <div class="card-cover cover-biz3">
+            <div class="cover-emoji">🗺️</div>
+            <div class="cover-title">Scale IA 2025<br>Feuille de Route</div>
+            <div class="cover-subtitle">NeuralPath · Entrepreneur</div>
           </div>
-        </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« Le guide Pro sur les LLMs est une pépite. J'ai enfin compris l'attention mechanism après des mois à ne pas y arriver avec des ressources en anglais. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent2)">TK</div>
-          <div>
-            <div class="testi-name">Thomas K.</div>
-            <div class="testi-role">Développeur Backend, Paris</div>
+          <span class="card-tier tier-biz">📍 Guide Stratégique</span>
+          <h3 class="card-title">Scale IA 2025 :<br>Feuille de Route</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-biz"></div></div>
+            <span class="level-label">ENTREPRENEUR</span>
           </div>
-        </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« J'ai monté mon premier pipeline RAG en suivant l'ebook Expert. Ça m'a pris 2 semaines, là où j'estimais 3 mois. La valeur est ridicule par rapport au prix. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--accent3)">SA</div>
-          <div>
-            <div class="testi-name">Samir A.</div>
-            <div class="testi-role">Entrepreneur, Bordeaux</div>
+          <p class="card-desc">La feuille de route complète de l'entrepreneur IA en 2025. Quels outils adopter, dans quel ordre, avec quelles priorités — pour passer à la vitesse supérieure sans se perdre.</p>
+          <ul class="card-features">
+            <li>Roadmap IA 2025 étape par étape</li>
+            <li>Les outils indispensables classés</li>
+            <li>Stratégie de déploiement progressive</li>
+            <li>KPIs et métriques à suivre</li>
+          </ul>
+          <div class="card-price">
+            <span class="price-main">149,99 €</span>
           </div>
+          <a href="https://neuralpath.gumroad.com/l/eijbwr" target="_blank" class="btn-card btn-biz">🛒 Obtenir la feuille de route</a>
         </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★☆</div>
-        <p class="testi-text">« Très bon niveau de vulgarisation. On sent que les auteurs connaissent leur sujet ET savent enseigner — ce qui est rare dans le domaine de l'IA. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--green)">JR</div>
-          <div>
-            <div class="testi-name">Julie R.</div>
-            <div class="testi-role">Data Analyst, Toulouse</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« Le free book seul vaut la peine. Je l'ai partagé à toute ma famille qui se demandait ce qu'est l'IA. Maintenant je passe au niveau 2. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#e11d48)">CM</div>
-          <div>
-            <div class="testi-name">Clément M.</div>
-            <div class="testi-role">Prof de SVT, Nantes</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« J'avais déjà de l'expérience en ML mais le guide Expert m'a appris des choses sur le fine-tuning que je ne trouvais que dans des papers académiques. »</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:#0ea5e9">LP</div>
-          <div>
-            <div class="testi-name">Léa P.</div>
-            <div class="testi-role">ML Engineer, Remote</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <span class="section-label">Questions fréquentes</span>
-      <h2 class="section-title">On anticipe<br>tes doutes</h2>
-    </div>
+        <!-- BIZ 3 — Productivité x3 -->
+        <div class="product-card card-biz reveal" data-cat="business">
+          <span class="platform-pill pill-gr">🍑 Gumroad</span>
+          <div class="card-cover cover-biz4">
+            <div class="cover-emoji">⚡</div>
+            <div class="cover-title">Productivité x3<br>Sans Recruter</div>
+            <div class="cover-subtitle">NeuralPath · Méthode</div>
+          </div>
+          <span class="card-tier tier-biz">🔥 Méthode Exclusive</span>
+          <h3 class="card-title">Productivité x3 :<br>Scaler sans Recruter</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-biz"></div></div>
+            <span class="level-label">DIRIGEANT · FREELANCE</span>
+          </div>
+          <p class="card-desc">La méthode pour tripler ta productivité sans embaucher. Délègue à des systèmes IA, automatise les tâches répétitives, libère du temps pour ce qui a de la valeur.</p>
+          <ul class="card-features">
+            <li>Audit de tes tâches chronophages</li>
+            <li>Système d'automatisation en 3 étapes</li>
+            <li>Les 12 outils IA qui changent tout</li>
+            <li>Templates prêts à l'emploi</li>
+          </ul>
+          <div class="card-price">
+            <span class="price-main">149,99 €</span>
+          </div>
+          <a href="https://neuralpath.gumroad.com/l/bbgli" target="_blank" class="btn-card btn-biz">🛒 Obtenir la méthode</a>
+        </div>
 
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          Faut-il avoir des connaissances en programmation pour profiter des guides ?
-          <span class="arrow">+</span>
+        <!-- BIZ 4 — Ebook Pro -->
+        <div class="product-card card-biz reveal" data-cat="business">
+          <span class="platform-pill pill-gr">🍑 Gumroad</span>
+          <div class="card-cover cover-biz1">
+            <div class="cover-emoji">📘</div>
+            <div class="cover-title">Ebook Pro<br>NeuralPath</div>
+            <div class="cover-subtitle">NeuralPath · Ebook</div>
+          </div>
+          <span class="card-tier tier-biz">📘 Ebook Pro</span>
+          <h3 class="card-title">Ebook Pro<br>NeuralPath</h3>
+          <div class="level-bar">
+            <span class="level-label">NIVEAU</span>
+            <div class="level-track"><div class="level-fill fill-biz"></div></div>
+            <span class="level-label">INTERMÉDIAIRE</span>
+          </div>
+          <p class="card-desc">L'ebook qui condense les meilleures stratégies IA appliquées au business. Méthodes testées, cas concrets, résultats mesurables. Le guide de référence pour passer à l'action.</p>
+          <ul class="card-features">
+            <li>Stratégies IA testées & validées</li>
+            <li>Cas concrets avec résultats chiffrés</li>
+            <li>Plan d'action opérationnel</li>
+            <li>Bonus : checklist 30 actions IA</li>
+          </ul>
+          <div class="card-price">
+            <span class="price-main">39,99 €</span>
+          </div>
+          <a href="https://neuralpath.gumroad.com/l/ypwekg" target="_blank" class="btn-card btn-biz">🛒 Obtenir l'ebook Pro</a>
         </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Non. Les deux premiers guides (Gratuit et Starter) sont entièrement accessibles sans aucune notion de code. Le guide Pro introduit des exemples de code Python simples avec des explications ligne par ligne. L'ebook Expert suppose une familiarité basique avec Python. Si tu débutes vraiment, commence par le guide gratuit — tu verras vite où tu en es.</div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          Comment reçois-je les ebooks après achat ?
-          <span class="arrow">+</span>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Immédiatement ! Après paiement, tu reçois un email avec un lien de téléchargement sécurisé. Les ebooks sont en format PDF haute qualité, lisibles sur tous les appareils (ordinateur, tablette, liseuse, smartphone). Le lien est valable à vie et tu peux re-télécharger autant de fois que tu veux.</div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          La garantie 30 jours fonctionne comment concrètement ?
-          <span class="arrow">+</span>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Simple : si dans les 30 jours suivant ton achat tu estimes que l'ebook ne t'a pas apporté de valeur, tu envoies un email à contact@neuralpath.io avec ton numéro de commande et tu es remboursé dans les 48h. Aucune question, aucun formulaire à remplir.</div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          Les mises à jour sont-elles vraiment incluses à vie ?
-          <span class="arrow">+</span>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Oui. L'IA évolue à toute vitesse. Chaque fois qu'une mise à jour majeure est publiée (nouveau modèle important, nouvelle technique, correction), tu reçois un email avec le lien de téléchargement de la nouvelle version, gratuitement. Ça fait partie du deal.</div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          Dois-je acheter les ebooks dans l'ordre ?
-          <span class="arrow">+</span>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Fortement recommandé, surtout pour les premiers. Chaque guide s'appuie sur les concepts du précédent. Si tu as déjà des bases solides en ML, tu peux commencer directement au Pro ou Expert, mais la lecture du guide Starter t'assurera de n'avoir aucun angle mort dans ta compréhension.</div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          Y a-t-il une version bundle avec tous les ebooks ?
-          <span class="arrow">+</span>
-        </div>
-        <div class="faq-a">
-          <div class="faq-a-inner">Oui ! Le Bundle Complet (Starter + Pro + Expert) est disponible à 99€ au lieu de 127€ — soit 28€ d'économie. Il suffit de sélectionner l'option "Bundle" dans le formulaire de commande. Le guide gratuit est bien sûr inclus à part entière.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- CTA FINAL -->
-<section class="cta-final">
-  <span class="section-label" style="display:block;margin-bottom:.75rem">Prêt à passer à l'action ?</span>
-  <h2>Le meilleur moment<br>pour comprendre l'IA,<br>c'est <span>maintenant</span>.</h2>
-  <p>Commence avec le guide gratuit. Aucune carte bancaire requise. Aucune obligation. Juste la connaissance.</p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-    <button class="btn-primary" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="openModal('free')">📥 Télécharger gratuitement</button>
-    <a href="#ebooks" class="btn-ghost">Voir tous les guides →</a>
-  </div>
+      </div><!-- /products-grid Business -->
+
+      <div class="guarantee reveal">
+        <span>🛡️</span>
+        <span><strong>Garantie satisfait ou remboursé</strong> — Toutes nos formations sont couvertes. Si tu n'es pas satisfait, remboursement sans tracas via la plateforme de paiement correspondante.</span>
+      </div>
+    </div><!-- /section Business -->
+
+  </div><!-- /container -->
 </section>
 
 <!-- TELEGRAM BAND -->
-<div style="background:linear-gradient(135deg,rgba(0,229,255,0.06),rgba(124,58,237,0.06));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem;text-align:center;">
-  <div style="max-width:600px;margin:0 auto">
-    <div style="font-size:1.8rem;margin-bottom:0.5rem">✈️</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);margin-bottom:0.4rem">Rejoins la communauté Telegram</div>
-    <div style="font-size:0.9rem;color:var(--muted);margin-bottom:1.25rem">Tips IA quotidiens · Outils du moment · Extraits exclusifs · Actus vulgarisées</div>
-    <a href="https://t.me/neuralpathia" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:var(--black);padding:0.8rem 1.8rem;border-radius:6px;font-weight:700;font-size:0.95rem;text-decoration:none;box-shadow:0 0 24px rgba(0,229,255,0.25)">✈️ Rejoindre le canal gratuit →</a>
-  </div>
+<div class="telegram-band">
+  <div class="t-emoji">✈️</div>
+  <h3>Rejoins la communauté Telegram</h3>
+  <p>Tips IA quotidiens · Outils du moment · Extraits exclusifs · Actus vulgarisées</p>
+  <a href="https://t.me/neuralpathia" target="_blank" class="btn-telegram">✈️ Rejoindre le canal gratuit →</a>
 </div>
 
 <!-- FOOTER -->
@@ -1526,92 +786,60 @@
   <div class="footer-inner">
     <div class="footer-logo">Neural<span>Path</span></div>
     <ul class="footer-links">
-      <li><a href="#ebooks">Formations</a></li>
-      <li><a href="#apprendre">Programme</a></li>
-      <li><a href="#temoignages">Avis</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#ia">Formations IA</a></li>
+      <li><a href="#business">Business</a></li>
       <li><a href="https://t.me/neuralpathia" target="_blank">Telegram</a></li>
       <li><a href="mailto:contact@neuralpath.io">Contact</a></li>
     </ul>
-    <p class="footer-copy">© 2025 NeuralPath · Mentions légales · CGV</p>
+    <p class="footer-copy">© 2025 NeuralPath · Tous droits réservés</p>
   </div>
 </footer>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modal-content"></div>
-  </div>
-</div>
-
 <script>
-// ── FAQ ──
-function toggleFaq(el) {
-  const item = el.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
+/* ── FILTER ── */
+function filter(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all') {
+      card.classList.remove('hidden');
+    } else {
+      const cardCat = card.getAttribute('data-cat');
+      card.classList.toggle('hidden', cardCat !== cat);
+    }
+  });
+
+  // Show/hide section headers
+  const iaSection = document.getElementById('ia');
+  const bizSection = document.getElementById('business');
+  if (cat === 'ia') {
+    bizSection.style.display = 'none';
+    iaSection.style.display = '';
+  } else if (cat === 'business') {
+    iaSection.style.display = 'none';
+    bizSection.style.display = '';
+  } else {
+    iaSection.style.display = '';
+    bizSection.style.display = '';
+  }
 }
 
-// ── LEMON SQUEEZY CHECKOUT LINKS ──
-const checkoutLinks = {
-  free:    'https://neuralpath.lemonsqueezy.com/checkout/buy/afc0332f-5a16-42d7-b48d-4e5c482e7994',
-  starter: 'https://neuralpath.lemonsqueezy.com/checkout/buy/57d61549-b733-458f-b53f-b110c97f7fe3',
-  pro:     'https://neuralpath.lemonsqueezy.com/checkout/buy/3686e986-4169-4b80-a031-2586e48d4164',
-  expert:  'https://neuralpath.lemonsqueezy.com/checkout/buy/311a9cbe-8820-43ab-87a1-8369dcc410d4'
-};
-
-function openModal(type) {
-  window.open(checkoutLinks[type], '_blank');
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeModalOutside(e) {
-  if (e.target.id === 'modal') closeModal();
-}
-
-function formatExpiry(input) {
-  let v = input.value.replace(/\D/g, '').substring(0, 4);
-  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
-  input.value = v;
-}
-
-// ── SCROLL REVEAL ──
+/* ── SCROLL REVEAL ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08 });
-
+}, { threshold: 0.06 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ── SMOOTH SCROLL ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-// ── NAV ACTIVE ──
+/* ── NAV SCROLL ── */
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
-  if (window.scrollY > 50) {
-    nav.style.borderBottomColor = 'rgba(30,45,66,0.8)';
-  } else {
-    nav.style.borderBottomColor = 'var(--border)';
-  }
+  nav.style.borderBottomColor = window.scrollY > 50 ? 'rgba(30,45,66,.9)' : 'var(--border)';
 });
 </script>
 </body>
